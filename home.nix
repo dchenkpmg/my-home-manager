@@ -151,9 +151,9 @@ in
       fi
     '';
     sessionVariables = {
-      GPG_TTY = "''$TTY";
+      GPG_TTY = "$TTY";
 
-      PATH = "''$PATH:''$HOME/.pulumi/bin:''$PATH:''$HOME/.local/bin:''$PATH:''$HOME/.pyenv/bin";
+      PATH = "$PATH:$HOME/.pulumi/bin:$PATH:$HOME/.local/bin:$PATH:$HOME/.pyenv/bin";
 
       OPENAI_API_TYPE = "azure";
       OPENAI_API_BASE = "https://dchenkpmg-openai.openai.azure.com";
@@ -209,9 +209,10 @@ in
       # Specify the plugins you want to use
       plugins = [
         "git"
-        "z"
         "docker"
         "docker-compose"
+        "poetry"
+        "tmux"
       ];
     };
   };
