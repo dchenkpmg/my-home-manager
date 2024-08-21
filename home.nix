@@ -162,10 +162,10 @@ in
       OPENAI_API_BASE = "https://dchenkpmg-openai.openai.azure.com";
       OPENAI_API_AZURE_ENGINE = "dchenkpmg";
       OPENAI_API_AZURE_VERSION = "2024-02-01";
-      OPENAI_API_KEY = "***REMOVED***";
+      OPENAI_API_KEY = "";
 
       AZURE_API_BASE = "https://dchenkpmg-openai.openai.azure.com/";
-      AZURE_API_KEY = "***REMOVED***";
+      AZURE_API_KEY = "";
       AZURE_API_VERSION = "2024-02-01";
     };
     enableCompletion = true;
