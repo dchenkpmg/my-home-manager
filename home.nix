@@ -1,7 +1,7 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   username = "dylanchen1";
-  # link = lib.file.mkOutOfStoreSymlink;
+  link = config.lib.file.mkOutOfStoreSymlink;
 in
 {
   home = {
@@ -41,6 +41,7 @@ in
       sqlite
       tree
       time
+      tlrc
       libtelnet
       wget
       unzip
@@ -49,8 +50,15 @@ in
     homeDirectory = "/home/${username}";
 
     stateVersion = "23.11";
-    # file.".config/nvim".source = link "/home/${username}/my-home-manager/lazyvim";
+    file.".bash_sysinit".source = link "/home/${username}/my-home-manager/.bash_sysinit";
+    # file.".tmux.conf".source = link "/home/${username}/my-home-manager/.tmux.conf";
+    # file.".tmux.conf.local".source = link "/home/${username}/my-home-manager/.tmux.conf.local";
+    
   };
+
+  # programs.tmux = {
+  #   enable = true;
+  # };
 
   services.gpg-agent = {
     enable = true;
@@ -131,6 +139,18 @@ in
         # Commit these changes
         gum confirm "Commit changes?" && git commit -m "$SUMMARY" -m "$DESCRIPTION"
       }
+
+      # Preferred editor for local and remote sessions
+      if [[ -n $SSH_CONNECTION ]]; then
+        export EDITOR='vim'
+      else
+        export EDITOR='nvim'
+      fi
+
+
+      if [ -f ~/.bash_sysinit ]; then
+          . ~/.bash_sysinit
+      fi
     '';
     sessionVariables = {
       GPG_TTY = "''$TTY";
