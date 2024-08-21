@@ -26,9 +26,8 @@ in
       texliveFull
       curl
       fd
-      git
       git-lfs
-      gnugrep 
+      gnugrep
       graphviz
       gum
       gzip
@@ -55,13 +54,7 @@ in
     file.".tmux.conf".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf";
     file.".tmux.conf.local".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf.local";
     file.".config/nvim".source = link "/home/${username}/my-home-manager/nvim";
-
-    
   };
-
-  # programs.tmux = {
-  #   enable = true;
-  # };
 
   services.gpg-agent = {
     enable = true;
@@ -158,7 +151,7 @@ in
     sessionVariables = {
       GPG_TTY = "''$TTY";
 
-      PATH="''$PATH:''$HOME/.pulumi/bin:''$PATH:''$HOME/.local/bin:''$PATH:''$HOME/.pyenv/bin";
+      PATH = "''$PATH:''$HOME/.pulumi/bin:''$PATH:''$HOME/.local/bin:''$PATH:''$HOME/.pyenv/bin";
 
       OPENAI_API_TYPE = "azure";
       OPENAI_API_BASE = "https://dchenkpmg-openai.openai.azure.com";
