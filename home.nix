@@ -54,6 +54,8 @@ in
     file.".tmux".source = link "/home/${username}/my-home-manager/.tmux";
     file.".tmux.conf".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf";
     file.".tmux.conf.local".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf.local";
+    file.".config/nvim".source = link "/home/${username}/my-home-manager/nvim";
+
     
   };
 
