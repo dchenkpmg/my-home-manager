@@ -54,6 +54,7 @@ in
     file.".tmux.conf".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf";
     file.".tmux.conf.local".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf.local";
     file.".config/nvim".source = link "/home/${username}/my-home-manager/nvim";
+    file.".p10k.zsh".source = link "/home/${username}/my-home-manager/.p10k.zsh";
   };
 
   services.gpg-agent = {
