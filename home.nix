@@ -44,6 +44,7 @@ in
       libtelnet
       wget
       unzip
+      tmux
     ];
 
     homeDirectory = "/home/${username}";
