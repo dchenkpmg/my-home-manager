@@ -22,16 +22,27 @@ in
       gping
       zathura
       azure-cli
-      azure-function-core-tools
+      azure-functions-core-tools
       texliveFull
       curl
-      fd-find
+      fd
       git
       git-lfs
-      grep 
+      gnugrep 
       graphviz
-      grep
+      gum
       gzip
+      imagemagick
+      lsof
+      man
+      nodejs
+      ripgrep
+      rsync
+      sqlite
+      tree
+      time
+      libtelnet
+      wget
       unzip
     ];
 
@@ -97,6 +108,28 @@ in
         
         rm /tmp/commit_msg.txt
         return 0
+      }
+
+      function gumc() {
+        local TYPE SCOPE SUMMARY DESCRIPTION
+
+        # Use gum to choose the type of change
+        TYPE=$(gum choose "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert")
+        
+        # Use gum to input the scope
+        SCOPE=$(gum input --placeholder "scope")
+
+        # Since the scope is optional, wrap it in parentheses if it has a value
+        test -n "$SCOPE" && SCOPE="($SCOPE)"
+
+        # Pre-populate the input with the type(scope): so that the user may change it
+        SUMMARY=$(gum input --value "$TYPE$SCOPE: " --placeholder "Summary of this change")
+        
+        # Use gum to write the description
+        DESCRIPTION=$(gum write --placeholder "Details of this change (CTRL+D to finish)")
+
+        # Commit these changes
+        gum confirm "Commit changes?" && git commit -m "$SUMMARY" -m "$DESCRIPTION"
       }
     '';
     sessionVariables = {
