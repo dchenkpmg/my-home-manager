@@ -51,8 +51,9 @@ in
 
     stateVersion = "23.11";
     file.".bash_sysinit".source = link "/home/${username}/my-home-manager/.bash_sysinit";
-    # file.".tmux.conf".source = link "/home/${username}/my-home-manager/.tmux.conf";
-    # file.".tmux.conf.local".source = link "/home/${username}/my-home-manager/.tmux.conf.local";
+    file.".tmux".source = link "/home/${username}/my-home-manager/.tmux";
+    file.".tmux.conf".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf";
+    file.".tmux.conf.local".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf.local";
     
   };
 
