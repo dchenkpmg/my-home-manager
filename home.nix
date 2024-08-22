@@ -13,7 +13,6 @@ in
       python3
       git
       yazi
-      tmux
       docker
       bat
       btop
@@ -32,6 +31,7 @@ in
       gum
       gzip
       imagemagick
+      jq
       lsof
       man
       pkgs-unstable.neovim
