@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 let
   username = "dylanchen1";
   link = config.lib.file.mkOutOfStoreSymlink;
 in
 {
+  # overlays = [ inputs.neovim-nightly-overlay.overlay ];
   home = {
     inherit username;
     packages = with pkgs; [
@@ -34,6 +35,7 @@ in
       imagemagick
       lsof
       man
+      pkgs-unstable.neovim
       nodejs
       ripgrep
       rsync
@@ -63,9 +65,10 @@ in
     enableZshIntegration = true;
   };
 
-  programs.neovim = {
-    enable = true;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   package = pkgs-unstable.neovim;
+  # };
 
   programs.zoxide = {
     enable = true;
