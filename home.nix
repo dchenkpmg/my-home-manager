@@ -4,7 +4,6 @@ let
   link = config.lib.file.mkOutOfStoreSymlink;
 in
 {
-  # overlays = [ inputs.neovim-nightly-overlay.overlay ];
   home = {
     inherit username;
     packages = with pkgs; [
@@ -47,6 +46,7 @@ in
       wget
       unzip
       tmux
+      cargo
     ];
 
     homeDirectory = "/home/${username}";
@@ -64,11 +64,6 @@ in
     enable = true;
     enableZshIntegration = true;
   };
-
-  # programs.neovim = {
-  #   enable = true;
-  #   package = pkgs-unstable.neovim;
-  # };
 
   programs.zoxide = {
     enable = true;
@@ -162,10 +157,8 @@ in
       OPENAI_API_BASE = "https://dchenkpmg-openai.openai.azure.com";
       OPENAI_API_AZURE_ENGINE = "dchenkpmg";
       OPENAI_API_AZURE_VERSION = "2024-02-01";
-      OPENAI_API_KEY = "";
 
       AZURE_API_BASE = "https://dchenkpmg-openai.openai.azure.com/";
-      AZURE_API_KEY = "";
       AZURE_API_VERSION = "2024-02-01";
     };
     enableCompletion = true;
@@ -173,14 +166,6 @@ in
     syntaxHighlighting.enable = true;
     shellAliases = {
 
-      # Set personal aliases, overriding those provided by oh-my-zsh libs,
-      # plugins, and themes. Aliases can be placed here, though oh-my-zsh
-      # users are encouraged to define aliases within the ZSH_CUSTOM folder.
-      # For a full list of active aliases, run `alias`.
-      #
-      # Example aliases
-      # alias zshconfig="mate ~/.zshrc"
-      # alias ohmyzsh="mate ~/.oh-my-zsh"
       bfg = "java -jar ~/bfg-1.14.0.jar";
       # https://forum.endeavouros.com/t/exa-has-been-deprecated/45293/12
       # ls to eza
@@ -196,7 +181,6 @@ in
       lt = "eza --tree --level=2 --color=always --group-directories-first --icons"; # tree
       "l." = "eza -a | grep -E '''^\\.'''";
 
-      # # alias gumc="sudo ~/commit.sh"
       cd = "z";
       interpreter = "interpreter --model azure/dchenkpmg --context_window=128000 --max_output=10000";
     };
