@@ -53,11 +53,8 @@ in
     homeDirectory = "/home/${username}";
 
     stateVersion = "23.11";
-    # file.".bash_sysinit".source = link "/home/${username}/my-home-manager/.bash_sysinit";
-    # file.".tmux".source = link "/home/${username}/my-home-manager/.tmux";
+
     file.".tmux/plugins/tpm".source = link "/home/${username}/my-home-manager/tpm";
-    # file.".tmux.conf".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf";
-    # file.".tmux.conf.local".source = link "/home/${username}/my-home-manager/.tmux/.tmux.conf.local";
     file.".config/nvim".source = link "/home/${username}/my-home-manager/nvim";
     file.".p10k.zsh".source = link "/home/${username}/my-home-manager/.p10k.zsh";
   };
@@ -85,8 +82,8 @@ in
       set -g renumber-windows on    # renumber windows when a window is closed
 
       set -g set-titles on          # set terminal title
+      set -g set-titles-string "🌐 #h 📂 #S 🔢 #I 📝 #W"
 
-      # set -g set-titles-string '#(hostname) ❐ #S ● #I #W"
       set -g display-panes-time 800 # slightly longer pane indicators display time
       set -g display-time 1000      # slightly longer status messages display time
 
@@ -329,6 +326,7 @@ in
 
       AZURE_API_BASE = "https://dchenkpmg-openai.openai.azure.com/";
       AZURE_API_VERSION = "2024-02-01";
+      AZURE_OPENAI_API_KEY = "";
     };
     enableCompletion = true;
     enableAutosuggestions = true;
