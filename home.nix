@@ -55,7 +55,7 @@ in
     stateVersion = "23.11";
 
     file.".config/nvim".source = link "/home/${username}/my-home-manager/nvim";
-    file.".p10k.zsh".source = link "/home/${username}/my-home-manager/.p10k.zsh";
+    file.".p10k.zsh".source = link "/home/${username}/my-home-manager/terminal/.p10k.zsh";
   };
 
   programs.tmux = {
