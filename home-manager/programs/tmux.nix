@@ -1,8 +1,28 @@
-{ lib, pkgs, config, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
+let
+  tmux-super-fingers = pkgs.tmuxPlugins.mkTmuxPlugin
+    {
+      pluginName = "tmux-super-fingers";
+      version = "unstable-2023-01-06";
+      src = pkgs.fetchFromGitHub {
+        owner = "artemave";
+        repo = "tmux_super_fingers";
+        rev = "2c12044984124e74e21a5a87d00f844083e4bdf7";
+        sha256 = "sha256-cPZCV8xk9QpU49/7H8iGhQYK6JwWjviL29eWabuqruc=";
+      };
+    };
+in
 {
   programs.tmux = {
     enable = true;
     plugins = with pkgs; [
+      {
+        plugin = pkgs-unstable.tmuxPlugins.fingers;
+      }
+      {
+        plugin = tmux-super-fingers;
+        extraConfig = "set -g @super-fingers-key f";
+      }
       {
         plugin = pkgs-unstable.tmuxPlugins.rose-pine;
         extraConfig = ''
@@ -48,8 +68,7 @@
       setw -q -g utf8 on
 
       set -g history-limit 5000                 # boost history
-
-      # bind r run '"$TMUX_PROGRAM" ''${TMUX_SOCKET:+-S "$TMUX_SOCKET"} source "$TMUX_CONF"' \; display "#{TMUX_CONF} sourced"
+      bind r run '"$TMUX_PROGRAM" ''${TMUX_SOCKET:+-S "$TMUX_SOCKET"} source "$TMUX_CONF"' \; display "#{TMUX_CONF} sourced"
 
       set -g base-index 1           # start windows numbering at 1
       setw -g pane-base-index 1     # make pane numbering consistent with windows
@@ -90,9 +109,6 @@
       bind > swap-pane -D       # swap current pane with the next one
       bind < swap-pane -U       # swap current pane with the previous one
 
-      # maximize current pane
-      bind + run "cut -c3- '#{TMUX_CONF}' | sh -s _maximize_pane '#{session_name}' '#D'"
-
       # pane resizing
       bind -r H resize-pane -L 2
       bind -r J resize-pane -D 2
@@ -105,13 +121,6 @@
       bind -r C-h previous-window # select previous window
       bind -r C-l next-window     # select next window
       bind Tab last-window        # move to last active window
-
-      # toggle mouse
-      bind m run "cut -c3- '#{TMUX_CONF}' | sh -s _toggle_mouse"
-
-      bind U run "cut -c3- '#{TMUX_CONF}' | sh -s _urlview '#{pane_id}'"
-
-      bind F run "cut -c3- '#{TMUX_CONF}' | sh -s _fpp '#{pane_id}' '#{pane_current_path}'"
 
       bind Enter copy-mode # enter copy mode
 
