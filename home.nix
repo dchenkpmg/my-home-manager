@@ -54,13 +54,47 @@ in
 
     stateVersion = "23.11";
 
-    file.".tmux/plugins/tpm".source = link "/home/${username}/my-home-manager/tpm";
     file.".config/nvim".source = link "/home/${username}/my-home-manager/nvim";
     file.".p10k.zsh".source = link "/home/${username}/my-home-manager/.p10k.zsh";
   };
 
   programs.tmux = {
     enable = true;
+    plugins = with pkgs; [
+      {
+        plugin = pkgs-unstable.tmuxPlugins.rose-pine;
+        extraConfig = ''
+          set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
+          set -g @rose_pine_host 'on' # Enables hostname in the status bar
+          set -g @rose_pine_directory 'on' # Turn on the current folder component in the status bar
+          set -g @rose_pine_date_time '%d/%m/%y %H:%M' # It accepts the date UNIX command format (man date for info)
+          set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
+          set -g @rose_pine_bar_bg_disable 'on'
+          set -g @rose_pine_bar_bg_disabled_color_option 'default'
+          set -g @rose_pine_show_current_program 'on' # Forces tmux to show the current running program as window name
+          set -g @rose_pine_show_pane_directory 'on' # Forces tmux to show the current directory as
+          set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it updates with prefix + I
+        '';
+      }
+      {
+        plugin = tmuxPlugins.resurrect;
+        extraConfig = ''
+          set -g @resurrect-strategy-vim 'session'
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-capture-pane-contents 'on'
+        '';
+      }
+      {
+        plugin = tmuxPlugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-boot 'on'
+          set -g @continuum-save-interval '10'
+        '';
+      }
+      tmuxPlugins.better-mouse-mode
+      tmuxPlugins.yank
+    ];
     prefix = "C-a";
     extraConfig = ''
       setw -g xterm-keys on
@@ -146,18 +180,6 @@ in
       bind -T copy-mode-vi H send -X start-of-line
       bind -T copy-mode-vi L send -X end-of-line
 
-      if -b 'command -v xsel > /dev/null 2>&1' 'bind y run -b "\"\''$TMUX_PROGRAM\" \''${TMUX_SOCKET:+-S \"\''$TMUX_SOCKET\"} save-buffer - | xsel -i -b"'
-      if -b '! command -v xsel > /dev/null 2>&1 && command -v xclip > /dev/null 2>&1' 'bind y run -b "\"\''$TMUX_PROGRAM\" \''${TMUX_SOCKET:+-S \"\''$TMUX_SOCKET\"} save-buffer - | xclip -i -selection clipboard >/dev/null 2>&1"'
-      # copy to Wayland clipboard
-      if -b 'command -v wl-copy > /dev/null 2>&1' 'bind y run -b "\"\''$TMUX_PROGRAM\" \''${TMUX_SOCKET:+-S \"\''$TMUX_SOCKET\"} save-buffer - | wl-copy"'
-      # copy to macOS clipboard
-      if -b 'command -v pbcopy > /dev/null 2>&1' 'bind y run -b "\"\''$TMUX_PROGRAM\" \''${TMUX_SOCKET:+-S \"\''$TMUX_SOCKET\"} save-buffer - | pbcopy"'
-      if -b 'command -v reattach-to-user-namespace > /dev/null 2>&1' 'bind y run -b "\"\''$TMUX_PROGRAM\" \''${TMUX_SOCKET:+-S \"\''$TMUX_SOCKET\"} save-buffer - | reattach-to-usernamespace pbcopy"'
-      # copy to Windows clipboard
-      if -b 'command -v clip.exe > /dev/null 2>&1' 'bind y run -b "\"''\$TMUX_PROGRAM\" \''${TMUX_SOCKET:+-S \"\''$TMUX_SOCKET\"} save-buffer - | clip.exe"'
-      if -b '[ -c /dev/clipboard ]' 'bind y run -b "\"\''$TMUX_PROGRAM\" \''${TMUX_SOCKET:+-S \"\''$TMUX_SOCKET\"} save-buffer - > /dev/clipboard"'
-
-
       bind b list-buffers     # list paste buffers
       bind p paste-buffer -p  # paste from the top paste buffer
       bind P choose-buffer    # choose which buffer to paste from
@@ -195,21 +217,6 @@ in
       # Bind keys to split windows while retaining the current path
       bind-key % split-window -h -c "#{pane_current_path}"
       bind-key '"' split-window -v -c "#{pane_current_path}"
-
-      set -g @plugin 'rose-pine/tmux'
-      set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
-      set -g @rose_pine_host 'on' # Enables hostname in the status bar
-      set -g @rose_pine_directory 'on' # Turn on the current folder component in the status bar
-      set -g @rose_pine_date_time '%d/%m/%y %H:%M' # It accepts the date UNIX command format (man date for info)
-      set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
-      set -g @rose_pine_bar_bg_disable 'on'
-      set -g @rose_pine_bar_bg_disabled_color_option 'default'
-      set -g @rose_pine_show_current_program 'on' # Forces tmux to show the current running program as window name
-      set -g @rose_pine_show_pane_directory 'on' # Forces tmux to show the current directory as
-      set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it updates with prefix + I
-      set -g @plugin 'tmux-plugins/tpm'
-      
-      run '~/.tmux/plugins/tpm/tpm'
     '';
   };
 
@@ -326,7 +333,6 @@ in
 
       AZURE_API_BASE = "https://dchenkpmg-openai.openai.azure.com/";
       AZURE_API_VERSION = "2024-02-01";
-      AZURE_OPENAI_API_KEY = "";
     };
     enableCompletion = true;
     enableAutosuggestions = true;
