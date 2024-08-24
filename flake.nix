@@ -30,7 +30,7 @@
             inherit pkgs-unstable;
           };
           modules = [
-            ./home.nix
+            ./home-manager/home.nix
           ];
         };
       };
