@@ -23,6 +23,17 @@ let
         sha256 = "sha256-YnpWvW0iWANB0snVhLKBTnOXlD3LQfbeoSFeae7SJ0c=";
       };
     };
+  tmux-mode-indicator = pkgs.tmuxPlugins.mkTmuxPlugin
+    {
+      pluginName = "mode-indicator";
+      version = "unstable-2024-08-25";
+      src = pkgs.fetchFromGitHub {
+        owner = "MunifTanjim";
+        repo = "tmux-mode-indicator";
+        rev = "7027903adca37c54cb8f5fa99fc113b11c23c2c4";
+        sha256 = "sha256-SAzsn4LoG8Ju5t13/U3/ctlJQPyPgv2FjpPkWSeKbP0=";
+      };
+    };
 in
 {
   programs.tmux = {
@@ -48,21 +59,17 @@ in
           set -g @rose_pine_show_current_program 'on' # Forces tmux to show the current running program as window name
           set -g @rose_pine_show_pane_directory 'on' # Forces tmux to show the current directory as
           set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it updates with prefix + I
+          set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}'
         '';
       }
+      tmux-mode-indicator
       {
         plugin = pkgs-unstable.tmuxPlugins.resurrect;
         extraConfig = ''
           set -g @resurrect-capture-pane-contents 'on'
         '';
       }
-      {
-        plugin = pkgs-unstable.tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '10'
-        '';
-      }
+      pkgs-unstable.tmuxPlugins.continuum
       tmuxPlugins.better-mouse-mode
       tmuxPlugins.yank
     ];
