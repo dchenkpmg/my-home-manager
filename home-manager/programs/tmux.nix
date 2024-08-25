@@ -11,6 +11,18 @@ let
         sha256 = "sha256-cPZCV8xk9QpU49/7H8iGhQYK6JwWjviL29eWabuqruc=";
       };
     };
+  tmux-rose-pine = pkgs.tmuxPlugins.mkTmuxPlugin
+    {
+      pluginName = "rose-pine";
+      version = "unstable-2024-08-25";
+      rtpFilePath = "rose-pine.tmux";
+      src = pkgs.fetchFromGitHub {
+        owner = "rose-pine";
+        repo = "tmux";
+        rev = "5bf885fe2e181e9763d92d9c522b0526e901e449";
+        sha256 = "sha256-YnpWvW0iWANB0snVhLKBTnOXlD3LQfbeoSFeae7SJ0c=";
+      };
+    };
 in
 {
   programs.tmux = {
@@ -24,7 +36,7 @@ in
         extraConfig = "set -g @super-fingers-key f";
       }
       {
-        plugin = pkgs-unstable.tmuxPlugins.rose-pine;
+        plugin = tmux-rose-pine;
         extraConfig = ''
           set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
           set -g @rose_pine_host 'on' # Enables hostname in the status bar
@@ -39,18 +51,15 @@ in
         '';
       }
       {
-        plugin = tmuxPlugins.resurrect;
+        plugin = pkgs-unstable.tmuxPlugins.resurrect;
         extraConfig = ''
-          set -g @resurrect-strategy-vim 'session'
-          set -g @resurrect-strategy-nvim 'session'
           set -g @resurrect-capture-pane-contents 'on'
         '';
       }
       {
-        plugin = tmuxPlugins.continuum;
+        plugin = pkgs-unstable.tmuxPlugins.continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
-          set -g @continuum-boot 'on'
           set -g @continuum-save-interval '10'
         '';
       }
@@ -68,7 +77,6 @@ in
       setw -q -g utf8 on
 
       set -g history-limit 5000                 # boost history
-      bind r run '"$TMUX_PROGRAM" ''${TMUX_SOCKET:+-S "$TMUX_SOCKET"} source "$TMUX_CONF"' \; display "#{TMUX_CONF} sourced"
 
       set -g base-index 1           # start windows numbering at 1
       setw -g pane-base-index 1     # make pane numbering consistent with windows
