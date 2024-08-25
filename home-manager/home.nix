@@ -36,7 +36,7 @@ in
       git-lfs
       gnugrep
       graphviz
-      gum
+      pkgs-unstable.gum
       gzip
       imagemagick
       jq

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -36,10 +36,16 @@
         SUMMARY=$(gum input --value "$TYPE$SCOPE: " --placeholder "Summary of this change")
         
         # Use gum to write the description
-        DESCRIPTION=$(gum write --placeholder "Details of this change (CTRL+D to finish)")
+        DESCRIPTION=$(gum write --placeholder "Details of this change (ENTER to finish)")
 
         # Commit these changes
-        gum confirm "Commit changes?" && git commit -m "$SUMMARY" -m "$DESCRIPTION"
+        gum confirm \
+          --prompt.foreground="#e0def4" \
+          --selected.foreground="#1f1d2e" \
+          --selected.background="#f6c177" \
+          --unselected.foreground="#6e6a86" \
+          --unselected.background="#1f1d2e" \
+          "Commit changes?" && git commit -m "$SUMMARY" -m "$DESCRIPTION"
       }
 
       # Preferred editor for local and remote sessions
@@ -77,7 +83,7 @@
               local bus_file_path="$XDG_RUNTIME_DIR/bus"
               export DBUS_SESSION_BUS_ADDRESS=unix:path=$bus_file_path
               if [ ! -e "$bus_file_path" ]; then
-                  /usr/bin/dbus-daemon --session --address=$DBUS_SESSION_BUS_ADDRESS --nofork --nopidfile --syslog-only &
+                  (/usr/bin/dbus-daemon --session --address=$DBUS_SESSION_BUS_ADDRESS --nofork --nopidfile --syslog-only &)
               fi
           }
 
@@ -130,6 +136,7 @@
     ];
     oh-my-zsh = {
       enable = true;
+      package = pkgs-unstable.oh-my-zsh;
       # Specify the plugins you want to use
       plugins = [
         "git"

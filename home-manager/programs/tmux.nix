@@ -38,6 +38,7 @@ in
 {
   programs.tmux = {
     enable = true;
+    package = pkgs-unstable.tmux;
     plugins = with pkgs; [
       {
         plugin = pkgs-unstable.tmuxPlugins.fingers;
