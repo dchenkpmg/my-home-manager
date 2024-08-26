@@ -53,9 +53,10 @@ in
       libtelnet
       wget
       unzip
-      cargo
+      pkgs-unstable.cargo
       tree-sitter
       neofetch
+      lazygit
     ];
 
     homeDirectory = "/home/${username}";
