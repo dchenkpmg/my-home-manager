@@ -20,23 +20,46 @@
         rm -f -- "$tmp"
       }
 
+      # Define Rose Pine colors
+      # ROSE_PINE_BASE="#191724"
+      # ROSE_PINE_SURFACE="#1f1d2e"
+      # ROSE_PINE_OVERLAY="#26233a"
+      # ROSE_PINE_MUTED="#6e6a86"
+      # ROSE_PINE_SUBTLE="#908caa"
+      # ROSE_PINE_TEXT="#e0def4"
+      # ROSE_PINE_LOVE="#eb6f92"
+      # ROSE_PINE_GOLD="#f6c177"
+      # ROSE_PINE_ROSE="#ebbcba"
+      # ROSE_PINE_PINE="#31748f"
+      # ROSE_PINE_FOAM="#9ccfd8"
+      # ROSE_PINE_IRIS="#c4a7e7"
+      # ROSE_PINE_HIGHLIGHT_LOW="#21202e"
+      # ROSE_PINE_HIGHLIGHT_MED="#403d52"
+      # ROSE_PINE_HIGHLIGHT_HIGH="#524f67"
+
+
       function gumc() {
         local TYPE SCOPE SUMMARY DESCRIPTION
 
         # Use gum to choose the type of change
-        TYPE=$(gum choose "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert")
-        
+        TYPE=$(gum choose --cursor.foreground "#c4a7e7" --header.foreground "#c4a7e7" --selected.foreground "#f6c177" "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert")
+      
         # Use gum to input the scope
-        SCOPE=$(gum input --placeholder "scope")
+        # SCOPE=$(gum input --placeholder "scope")
+
+        SCOPE=$(gum input \
+            --placeholder "scope" \
+            --cursor.foreground "#c4a7e7" \
+        )
 
         # Since the scope is optional, wrap it in parentheses if it has a value
         test -n "$SCOPE" && SCOPE="($SCOPE)"
 
         # Pre-populate the input with the type(scope): so that the user may change it
-        SUMMARY=$(gum input --value "$TYPE$SCOPE: " --placeholder "Summary of this change")
+        SUMMARY=$(gum input --cursor.foreground "#c4a7e7" --value "$TYPE$SCOPE: " --placeholder "Summary of this change")
         
         # Use gum to write the description
-        DESCRIPTION=$(gum write --placeholder "Details of this change (ENTER to finish)")
+        DESCRIPTION=$(gum write --cursor.foreground "#c4a7e7" --placeholder "Details of this change (ENTER to finish)")
 
         # Commit these changes
         gum confirm \

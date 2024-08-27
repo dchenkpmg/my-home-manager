@@ -20,7 +20,7 @@ in
       eza
       python3
       git
-      yazi
+      pkgs-unstable.yazi
       docker
       bat
       btop
