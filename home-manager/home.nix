@@ -7,6 +7,7 @@ let
     ./programs/tmux.nix
     ./programs/pyenv.nix
     ./programs/zoxide.nix
+    ./programs/git.nix
     ./services/gpg-agent.nix
   ];
 in
@@ -19,7 +20,6 @@ in
       zsh
       eza
       python3
-      git
       pkgs-unstable.yazi
       docker
       bat

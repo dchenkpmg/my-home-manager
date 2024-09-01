@@ -1,0 +1,29 @@
+{ nixpkgs, nixpkgs-unstable, config, lib, ... }:
+{
+  programs.git = {
+    enable = true;
+    userEmail = "dylanchen1@kpmg.co.nz";
+    userName = "dchenkpmg";
+    signing.key = "7A950A3AB4300E4B";
+    aliases = {
+      graph = "log --all --graph --decorate --oneline";
+    };
+    ignores = [
+      ".DS_Store"
+    ];
+    extraConfig = """
+      [credential]
+        helper = /mnt/c/Users/dylanchen1/AppData/Local/Programs/Git/mingw64/bin/git-credential-manager.exe
+      [core]
+        excludesfile = /home/dylanchen1/.gitignore_global
+      [credential "https://dev.azure.com"]
+        useHttpPath = true
+      [commit]
+        gpgsign = true
+      [init]
+        defaultBranch = main
+      [includeIf "gitdir:~/personal-projects/"]
+        path = ~/personal-projects/.gitconfig
+    """;
+  };
+}
