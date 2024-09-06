@@ -1,7 +1,7 @@
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
-  build = ":AvanteBuild",
+  build = "make",
   opts = {
     -- add any opts here
     provider = "azure",

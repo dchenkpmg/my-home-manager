@@ -18,6 +18,7 @@ in
     packages = with pkgs; [
       home-manager
       zsh
+      gcc
       eza
       python3
       pkgs-unstable.yazi
@@ -27,7 +28,6 @@ in
       gnupg
       du-dust
       gping
-      zathura
       azure-cli
       azure-functions-core-tools
       texliveFull

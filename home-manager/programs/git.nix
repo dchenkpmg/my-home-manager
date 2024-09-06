@@ -4,7 +4,7 @@
     enable = true;
     userEmail = "dylanchen1@kpmg.co.nz";
     userName = "dchenkpmg";
-    signing.key = "7A950A3AB4300E4B";
+    signing.key = "ED5E1515657E21FC";
     aliases = {
       graph = "log --all --graph --decorate --oneline";
     };
