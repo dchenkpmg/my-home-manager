@@ -8,6 +8,7 @@ let
     ./programs/pyenv.nix
     ./programs/zoxide.nix
     ./programs/git.nix
+    ./programs/zathura.nix
     ./services/gpg-agent.nix
   ];
 in
@@ -57,6 +58,8 @@ in
       tree-sitter
       neofetch
       lazygit
+      at-spi2-core
+      fontconfig
     ];
 
     homeDirectory = "/home/${username}";
