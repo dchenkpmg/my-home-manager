@@ -4,6 +4,7 @@
     enable = true;
     enableZshIntegration = true;
     defaultCacheTtl = 86400;
+    maxCacheTtl = 86400;
     pinentryFlavor = "curses";
   };
 }

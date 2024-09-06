@@ -57,7 +57,7 @@ in
       pkgs-unstable.cargo
       tree-sitter
       neofetch
-      lazygit
+      pkgs-unstable.lazygit
       at-spi2-core
       fontconfig
     ];
