@@ -9,6 +9,7 @@ let
     ./programs/zoxide.nix
     ./programs/git.nix
     ./programs/zathura.nix
+    ./programs/btop.nix
     ./services/gpg-agent.nix
   ];
 in
@@ -25,7 +26,6 @@ in
       pkgs-unstable.yazi
       docker
       bat
-      btop
       gnupg
       du-dust
       gping

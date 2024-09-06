@@ -24,3 +24,5 @@ end
 vim.g.doge_doc_standard_python = "google"
 
 vim.opt.wrap = true
+
+vim.opt.smartindent = false
