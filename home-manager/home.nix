@@ -60,6 +60,7 @@ in
       pkgs-unstable.lazygit
       at-spi2-core
       fontconfig
+      lsix
     ];
 
     homeDirectory = "/home/${username}";
