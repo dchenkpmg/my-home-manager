@@ -61,6 +61,8 @@ in
       at-spi2-core
       fontconfig
       lsix
+      pkgs-unstable.poetry
+      pipx
     ];
 
     homeDirectory = "/home/${username}";
