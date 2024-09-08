@@ -10,6 +10,7 @@ let
     ./programs/git.nix
     ./programs/zathura.nix
     ./programs/btop.nix
+    ./programs/yazi.nix
     ./services/gpg-agent.nix
   ];
 in
@@ -23,7 +24,6 @@ in
       gcc
       eza
       python3
-      pkgs-unstable.yazi
       docker
       bat
       gnupg
@@ -63,6 +63,7 @@ in
       lsix
       pkgs-unstable.poetry
       pipx
+      wsl-open
     ];
 
     homeDirectory = "/home/${username}";
