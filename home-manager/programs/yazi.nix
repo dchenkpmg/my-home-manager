@@ -1,7 +1,7 @@
 { config, lib, pkgs, pkgs-unstable, ... }:
 {
   programs.yazi = {
-    enable = true;
+    enable = false;
     enableZshIntegration = true;
     package = pkgs-unstable.yazi;
     settings = {

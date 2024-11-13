@@ -5,7 +5,6 @@ let
   modules = [
     ./programs/zsh.nix
     ./programs/tmux.nix
-    ./programs/pyenv.nix
     ./programs/zoxide.nix
     ./programs/git.nix
     ./programs/zathura.nix
@@ -23,7 +22,6 @@ in
       zsh
       gcc
       eza
-      python3
       docker
       bat
       gnupg
@@ -61,9 +59,8 @@ in
       at-spi2-core
       fontconfig
       lsix
-      pkgs-unstable.poetry
-      pipx
       wsl-open
+      pkgs-unstable.ttyper
     ];
 
     homeDirectory = "/home/${username}";
