@@ -5,7 +5,7 @@ return {
   opts = {
     -- add any opts here
     provider = "azure",
-    auto_suggestions_provider = "azure",
+    -- auto_suggestions_provider = "azure",
     azure = {
       endpoint = "https://dchenkpmg-openai.openai.azure.com",
       deployment = "dchenkpmg",
