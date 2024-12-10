@@ -61,6 +61,7 @@ in
       lsix
       wsl-open
       pkgs-unstable.ttyper
+      pkgs-unstable.go
     ];
 
     homeDirectory = "/home/${username}";

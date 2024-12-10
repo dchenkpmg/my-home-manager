@@ -26,3 +26,6 @@ vim.g.doge_doc_standard_python = "google"
 vim.opt.wrap = true
 
 vim.opt.smartindent = false
+
+vim.opt.pumblend = 0
+vim.opt.winblend = 0
