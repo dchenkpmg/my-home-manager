@@ -117,7 +117,7 @@
     sessionVariables = {
       GPG_TTY = "$TTY";
 
-      PATH = "$PATH:$HOME/.pulumi/bin:$PATH:$HOME/.local/bin:$PATH:$HOME/.pyenv/bin";
+      PATH = "$PATH:$HOME/.pulumi/bin:$HOME/.local/bin:$HOME/.pyenv/bin:$HOME/go/bin";
 
       OPENAI_API_TYPE = "azure";
       OPENAI_API_BASE = "https://dchenkpmg-openai.openai.azure.com";
@@ -168,6 +168,7 @@
       # Specify the plugins you want to use
       plugins = [
         "git"
+        "direnv"
         "docker"
         "docker-compose"
         "poetry"

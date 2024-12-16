@@ -10,6 +10,8 @@ let
     ./programs/zathura.nix
     ./programs/btop.nix
     ./programs/yazi.nix
+    ./programs/fzf.nix
+    ./programs/direnv.nix
     ./services/gpg-agent.nix
   ];
 in

@@ -29,3 +29,5 @@ vim.opt.smartindent = false
 
 vim.opt.pumblend = 0
 vim.opt.winblend = 0
+
+vim.g.snacks_animate = false

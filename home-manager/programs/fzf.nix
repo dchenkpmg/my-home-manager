@@ -1,0 +1,8 @@
+{ config, lib, pkgs, pkgs-unstable, ... }:
+{
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    package = pkgs-unstable.fzf;
+  };
+}
