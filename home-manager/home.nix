@@ -64,6 +64,7 @@ in
       wsl-open
       pkgs-unstable.ttyper
       pkgs-unstable.go
+      shellcheck
     ];
 
     homeDirectory = "/home/${username}";

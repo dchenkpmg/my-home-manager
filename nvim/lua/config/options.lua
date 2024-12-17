@@ -31,3 +31,12 @@ vim.opt.pumblend = 0
 vim.opt.winblend = 0
 
 vim.g.snacks_animate = false
+
+local group = vim.api.nvim_create_augroup("__env", { clear = true })
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = ".env",
+  group = group,
+  callback = function(args)
+    vim.diagnostic.disable(args.buf)
+  end,
+})
