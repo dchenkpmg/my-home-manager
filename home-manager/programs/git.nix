@@ -30,6 +30,12 @@
       "includeIf \"gitdir:~/personal-projects/\"" = {
         path = "~/personal-projects/.gitconfig";
       };
+      "user \"https://github.com/kpmg-nz-emu\"" = {
+        email = "dylanchen1@kpmg.co.nz";
+      };
+      "credential \"https://github.com/kpmg-nz-emu\"" = {
+        username = "dylanchen1_kpmg";
+      };
     };
   };
 }

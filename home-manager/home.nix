@@ -60,11 +60,11 @@ in
       pkgs-unstable.lazygit
       at-spi2-core
       fontconfig
-      lsix
       wsl-open
       pkgs-unstable.ttyper
       pkgs-unstable.go
       shellcheck
+      pkgs-unstable.uv
     ];
 
     homeDirectory = "/home/${username}";
@@ -73,5 +73,9 @@ in
 
     file.".config/nvim".source = link "/home/${username}/my-home-manager/nvim";
     file.".p10k.zsh".source = link "/home/${username}/my-home-manager/terminal/.p10k.zsh";
+    file.".markdownlint-cli2.yaml".text = ''
+      config:
+        MD013: false
+    '';
   };
 }
