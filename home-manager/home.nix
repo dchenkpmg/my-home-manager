@@ -29,8 +29,8 @@ in
       gnupg
       du-dust
       gping
-      azure-cli
-      azure-functions-core-tools
+      pkgs-unstable.azure-cli
+      pkgs-unstable.azure-functions-core-tools
       texliveFull
       curl
       fd
@@ -44,7 +44,7 @@ in
       lsof
       man
       pkgs-unstable.neovim
-      nodejs
+      pkgs-unstable.nodejs
       ripgrep
       rsync
       sqlite

@@ -116,16 +116,7 @@
     '';
     sessionVariables = {
       GPG_TTY = "$TTY";
-
       PATH = "$PATH:$HOME/.pulumi/bin:$HOME/.local/bin:$HOME/.pyenv/bin:$HOME/go/bin";
-
-      OPENAI_API_TYPE = "azure";
-      OPENAI_API_BASE = "https://dchenkpmg-openai.openai.azure.com";
-      OPENAI_API_AZURE_ENGINE = "dchenkpmg";
-      OPENAI_API_AZURE_VERSION = "2024-02-01";
-
-      AZURE_API_BASE = "https://dchenkpmg-openai.openai.azure.com/";
-      AZURE_API_VERSION = "2024-02-01";
     };
     enableCompletion = true;
     enableAutosuggestions = true;
