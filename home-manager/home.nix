@@ -65,6 +65,7 @@ in
       pkgs-unstable.go
       shellcheck
       pkgs-unstable.uv
+      pkgs-unstable.typescript
     ];
 
     homeDirectory = "/home/${username}";

@@ -1,15 +1,3 @@
--- ~/.config/nvim/lua/plugins/lsp.lua
--- return {
---   {
---     "nvim-lspconfig",
---     opts = {
---       diagnostics = {
---         virtual_text = false,
---       },
---     },
---   },
--- }
-
 return {
   { -- change nvim-lspconfig options
     "nvim-lspconfig",
