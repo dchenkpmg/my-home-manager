@@ -7,11 +7,16 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   command = "set filetype=html",
 })
 
-local group = vim.api.nvim_create_augroup("__env", { clear = true })
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = ".env",
-  group = group,
-  callback = function(args)
-    vim.diagnostic.disable(args.buf)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sh",
+  callback = function()
+    if vim.fn.expand("%:t") == ".env" then
+      -- Disable ShellCheck or any linting for .env files
+      vim.b.ale_linters = {}
+      -- If using nvim-lint, you can set it to not lint .env files
+      require("lint").linters_by_ft = {
+        sh = {},
+      }
+    end
   end,
 })

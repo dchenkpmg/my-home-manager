@@ -66,6 +66,7 @@ in
       shellcheck
       pkgs-unstable.uv
       pkgs-unstable.typescript
+      pkgs-unstable.bfg-repo-cleaner
     ];
 
     homeDirectory = "/home/${username}";
