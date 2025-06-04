@@ -1,5 +1,7 @@
-{ nixpkgs, nixpkgs-unstable, config, lib, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 {
   programs.gh = {
     enable = true;
-    userEmail = "}
+    package = pkgs-unstable.gh;
+  };
+}

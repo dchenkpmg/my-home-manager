@@ -1,4 +1,4 @@
-{ nixpkgs, nixpkgs-unstable, config, lib, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 {
   programs.git = {
     enable = true;
