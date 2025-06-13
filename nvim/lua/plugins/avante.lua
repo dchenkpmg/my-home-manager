@@ -7,6 +7,11 @@ return {
     -- provider = "azure",
     -- auto_suggestions_provider = "azure",
     provider = "copilot",
+    providers = {
+      copilot = {
+        model = "gpt-4.1",
+      },
+    },
     -- azure = {
     --   endpoint = "https://dchenkpmg-openai.openai.azure.com",
     --   deployment = "dchenkpmg",

@@ -33,6 +33,9 @@
       "credential \"https://github.com/kpmg-nz-emu\"" = {
         username = "dylanchen1_kpmg";
       };
+      "credential \"https://github.com/dche610\"" = {
+        username = "dche610";
+      };
     };
   };
 }
