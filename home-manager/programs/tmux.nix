@@ -38,7 +38,15 @@ in
 {
   programs.tmux = {
     enable = true;
-    package = pkgs-unstable.tmux;
+    package = pkgs-unstable.tmux.overrideAttrs (finalAttrs: previousAttrs: {
+      version = "865117a05fa1e850da07f67b422a469ee58fe019";
+      src = pkgs.fetchFromGitHub {
+        owner = "tmux";
+        repo = "tmux";
+        rev = finalAttrs.version;
+        sha256 = "sha256-hjiNXGMlUC+jjPvw9a6EXUAGuHbGwRFY0cGi4/K+lak="; # Updated hash
+      };
+    });
     plugins = with pkgs; [
       {
         plugin = pkgs-unstable.tmuxPlugins.fingers;
@@ -184,6 +192,10 @@ in
       # Bind keys to split windows while retaining the current path
       bind-key % split-window -h -c "#{pane_current_path}"
       bind-key '"' split-window -v -c "#{pane_current_path}"
+
+      set -g allow-passthrough on
+      set -ga update-environment TERM
+      set -ga update-environment TERM_PROGRAM
     '';
   };
 }

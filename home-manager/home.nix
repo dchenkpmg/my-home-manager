@@ -9,7 +9,6 @@ let
     ./programs/git.nix
     ./programs/zathura.nix
     ./programs/btop.nix
-    ./programs/yazi.nix
     ./programs/fzf.nix
     ./programs/direnv.nix
     ./services/gpg-agent.nix
@@ -68,6 +67,12 @@ in
       pkgs-unstable.typescript
       pkgs-unstable.bfg-repo-cleaner
       pkgs-unstable.gh
+      pkgs-unstable.yarn
+      pkgs-unstable.duckdb
+      pkgs-unstable.wslu
+      pkgs-unstable.coursier
+      pkgs-unstable.lsix
+      pkgs-unstable.yazi
     ];
 
     homeDirectory = "/home/${username}";

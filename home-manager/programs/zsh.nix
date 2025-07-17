@@ -10,15 +10,6 @@
     initExtra = ''
       fpath=(${pkgs.docker}/zsh/vendor-completions $fpath)
       source ~/.p10k.zsh
-      
-      function yy() {
-        local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-        yazi "$@" --cwd-file="$tmp"
-        if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-          cd -- "$cwd"
-        fi
-        rm -f -- "$tmp"
-      }
 
       # Define Rose Pine colors
       # ROSE_PINE_BASE="#191724"
