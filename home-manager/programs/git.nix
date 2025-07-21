@@ -5,6 +5,13 @@
     userEmail = "dylanchen1@kpmg.co.nz";
     userName = "dchenkpmg";
     signing.key = "ED5E1515657E21FC";
+    delta = {
+      enable = true;
+      options = {
+        navigate = true;
+        side-by-side = true;
+      };
+    };
     aliases = {
       graph = "log --all --graph --decorate --oneline";
     };
