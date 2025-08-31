@@ -26,12 +26,6 @@
       init = {
         defaultBranch = "main";
       };
-      "credential \"https://github.com/dche610\"" = {
-        username = "dche610";
-      };
-      "credential \"https://github.com/mode-dch\"" = {
-        username = "mode-dch";
-      };
     };
   };
 }
