@@ -1,6 +1,11 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
-let
-  username = "dylanchen1";
+{
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}: let
+  username = "dychen";
   link = config.lib.file.mkOutOfStoreSymlink;
   modules = [
     ./programs/zsh.nix
@@ -11,25 +16,20 @@ let
     ./programs/btop.nix
     ./programs/fzf.nix
     ./programs/direnv.nix
-    ./services/gpg-agent.nix
+    ./programs/bat.nix
+    # ./services/gpg-agent.nix
   ];
-in
-{
+in {
   imports = modules;
   home = {
     inherit username;
     packages = with pkgs; [
       home-manager
-      zsh
-      gcc
       eza
       docker
-      bat
       gnupg
       du-dust
       gping
-      pkgs-unstable.azure-cli
-      pkgs-unstable.azure-functions-core-tools
       texliveFull
       curl
       fd
@@ -50,37 +50,32 @@ in
       tree
       time
       tlrc
-      libtelnet
       wget
       unzip
       pkgs-unstable.cargo
       tree-sitter
       neofetch
       pkgs-unstable.lazygit
-      at-spi2-core
-      fontconfig
-      wsl-open
       pkgs-unstable.ttyper
       pkgs-unstable.go
       shellcheck
       pkgs-unstable.uv
       pkgs-unstable.typescript
-      pkgs-unstable.bfg-repo-cleaner
       pkgs-unstable.gh
       pkgs-unstable.yarn
       pkgs-unstable.duckdb
-      pkgs-unstable.wslu
       pkgs-unstable.coursier
       pkgs-unstable.lsix
       pkgs-unstable.yazi
+      pkgs-unstable.circumflex
     ];
 
-    homeDirectory = "/home/${username}";
+    homeDirectory = "/Users/${username}";
 
-    stateVersion = "23.11";
+    stateVersion = "25.05";
 
-    file.".config/nvim".source = link "/home/${username}/my-home-manager/nvim";
-    file.".p10k.zsh".source = link "/home/${username}/my-home-manager/terminal/.p10k.zsh";
+    file.".config/nvim".source = link "/Users/${username}/my-home-manager/nvim";
+    file.".p10k.zsh".source = link "/Users/${username}/my-home-manager/terminal/.p10k.zsh";
     file.".markdownlint-cli2.yaml".text = ''
       config:
         MD013: false

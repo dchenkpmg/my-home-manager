@@ -1,15 +1,19 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   programs.git = {
     enable = true;
-    userEmail = "dylanchen1@kpmg.co.nz";
-    userName = "dchenkpmg";
-    signing.key = "ED5E1515657E21FC";
     delta = {
       enable = true;
       options = {
+        syntax-theme = "rose-pine";
         navigate = true;
         side-by-side = true;
+        line-numbers = true;
       };
     };
     aliases = {
@@ -19,29 +23,14 @@
       ".DS_Store"
     ];
     extraConfig = {
-      credential = {
-        helper = "/mnt/c/Users/dylanchen1/AppData/Local/Programs/Git/mingw64/bin/git-credential-manager.exe";
-      };
-      core = {
-        excludesfile = "/home/dylanchen1/.gitignore_global";
-      };
-      "credential \"https://dev.azure.com\"" = {
-        useHttpPath = true;
-      };
-      commit = {
-        gpgsign = true;
-      };
       init = {
         defaultBranch = "main";
       };
-      "includeIf \"gitdir:~/personal-projects/\"" = {
-        path = "~/personal-projects/.gitconfig";
-      };
-      "credential \"https://github.com/kpmg-nz-emu\"" = {
-        username = "dylanchen1_kpmg";
-      };
       "credential \"https://github.com/dche610\"" = {
         username = "dche610";
+      };
+      "credential \"https://github.com/mode-dch\"" = {
+        username = "mode-dch";
       };
     };
   };

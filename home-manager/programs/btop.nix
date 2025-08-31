@@ -1,5 +1,10 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   programs.btop = {
     enable = true;
   };
@@ -123,5 +128,5 @@
     theme[process_mid]="#9ccfd8"
     # Foam for mid and end
     theme[process_end]="#9ccfd8"
-    '';
+  '';
 }

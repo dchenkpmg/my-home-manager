@@ -1,6 +1,12 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
-let
-  tmux-super-fingers = pkgs.tmuxPlugins.mkTmuxPlugin
+{
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}: let
+  tmux-super-fingers =
+    pkgs.tmuxPlugins.mkTmuxPlugin
     {
       pluginName = "tmux-super-fingers";
       version = "unstable-2023-01-06";
@@ -11,7 +17,8 @@ let
         sha256 = "sha256-cPZCV8xk9QpU49/7H8iGhQYK6JwWjviL29eWabuqruc=";
       };
     };
-  tmux-rose-pine = pkgs.tmuxPlugins.mkTmuxPlugin
+  tmux-rose-pine =
+    pkgs.tmuxPlugins.mkTmuxPlugin
     {
       pluginName = "rose-pine";
       version = "unstable-2024-08-25";
@@ -23,7 +30,8 @@ let
         sha256 = "sha256-YnpWvW0iWANB0snVhLKBTnOXlD3LQfbeoSFeae7SJ0c=";
       };
     };
-  tmux-mode-indicator = pkgs.tmuxPlugins.mkTmuxPlugin
+  tmux-mode-indicator =
+    pkgs.tmuxPlugins.mkTmuxPlugin
     {
       pluginName = "mode-indicator";
       version = "unstable-2024-08-25";
@@ -34,8 +42,7 @@ let
         sha256 = "sha256-SAzsn4LoG8Ju5t13/U3/ctlJQPyPgv2FjpPkWSeKbP0=";
       };
     };
-in
-{
+in {
   programs.tmux = {
     enable = true;
     package = pkgs-unstable.tmux.overrideAttrs (finalAttrs: previousAttrs: {

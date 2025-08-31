@@ -1,8 +1,15 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   programs.zathura = {
     enable = true;
     options = {
+      selection-clipboard = "clipboard";
+
       default-bg = "#191724";
       default-fg = "#e0def4";
 

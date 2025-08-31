@@ -1,11 +1,11 @@
 {
-  description = "My Home Manager configuration";
+  description = "My Home Manager configuration for MacOS";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -13,7 +13,7 @@
   outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       lib = nixpkgs.lib;
-      system = "x86_64-linux";
+      system = "aarch64-darwin";
       pkgs = import nixpkgs {
         inherit system;
       };

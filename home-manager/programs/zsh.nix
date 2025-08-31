@@ -1,40 +1,36 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   programs.zsh = {
     enable = true;
+    initExtraBeforeCompInit = ''
+      # Ensure Nix profile is in PATH early
+      export PATH="$HOME/.nix-profile/bin:$PATH"
+    '';
+    autosuggestion.enable = true;
     initExtraFirst = ''
       # p10k instant prompt
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
     '';
     initExtra = ''
+      # for mac
+      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+       . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+      fi
       fpath=(${pkgs.docker}/zsh/vendor-completions $fpath)
       source ~/.p10k.zsh
-
-      # Define Rose Pine colors
-      # ROSE_PINE_BASE="#191724"
-      # ROSE_PINE_SURFACE="#1f1d2e"
-      # ROSE_PINE_OVERLAY="#26233a"
-      # ROSE_PINE_MUTED="#6e6a86"
-      # ROSE_PINE_SUBTLE="#908caa"
-      # ROSE_PINE_TEXT="#e0def4"
-      # ROSE_PINE_LOVE="#eb6f92"
-      # ROSE_PINE_GOLD="#f6c177"
-      # ROSE_PINE_ROSE="#ebbcba"
-      # ROSE_PINE_PINE="#31748f"
-      # ROSE_PINE_FOAM="#9ccfd8"
-      # ROSE_PINE_IRIS="#c4a7e7"
-      # ROSE_PINE_HIGHLIGHT_LOW="#21202e"
-      # ROSE_PINE_HIGHLIGHT_MED="#403d52"
-      # ROSE_PINE_HIGHLIGHT_HIGH="#524f67"
-
 
       function gumc() {
         local TYPE SCOPE SUMMARY DESCRIPTION
 
         # Use gum to choose the type of change
         TYPE=$(gum choose --cursor.foreground "#c4a7e7" --header.foreground "#c4a7e7" --selected.foreground "#f6c177" "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert")
-      
+
         # Use gum to input the scope
         # SCOPE=$(gum input --placeholder "scope")
 
@@ -48,7 +44,7 @@
 
         # Pre-populate the input with the type(scope): so that the user may change it
         SUMMARY=$(gum input --cursor.foreground "#c4a7e7" --value "$TYPE$SCOPE: " --placeholder "Summary of this change")
-        
+
         # Use gum to write the description
         DESCRIPTION=$(gum write --cursor.foreground "#c4a7e7" --placeholder "Details of this change (ENTER to finish)")
 
@@ -69,52 +65,19 @@
         export EDITOR='nvim'
       fi
 
-      # Function to auto-pass sudo password (optional)
-      sudo_autopasswd() {
-          # Uncomment and set your password if you want to auto-pass sudo
-          # echo "<your_ubuntu_wsl2_password>" | sudo -Svp ""
-          :
+
+      function awsauth {
+        ~/seek/aws-auth-bash/auth.sh "$@";
+        script_result="$?"
+
+        [[ -r "$HOME/.aws/sessiontoken" ]] && . "$HOME/.aws/sessiontoken";
+
+        return "$script_result"
       }
-
-      # Function to reset sudo password cache
-      sudo_resetpasswd() {
-          sudo -k
-      }
-
-      # Check if running inside WSL2
-      if [ -n "$WSL_DISTRO_NAME" ]; then
-          # Set up D-Bus and user runtime directory
-          export XDG_RUNTIME_DIR=/run/user/$(id -u)
-          if [ ! -d "$XDG_RUNTIME_DIR" ]; then
-              sudo_autopasswd
-              sudo mkdir -p $XDG_RUNTIME_DIR && sudo chmod 700 $XDG_RUNTIME_DIR && sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
-              sudo service dbus start
-              sudo_resetpasswd
-          fi
-
-          # Function to set up session D-Bus
-          set_session_dbus() {
-              local bus_file_path="$XDG_RUNTIME_DIR/bus"
-              export DBUS_SESSION_BUS_ADDRESS=unix:path=$bus_file_path
-              if [ ! -e "$bus_file_path" ]; then
-                  (/usr/bin/dbus-daemon --session --address=$DBUS_SESSION_BUS_ADDRESS --nofork --nopidfile --syslog-only &)
-              fi
-          }
-
-          # Call the function to set up session D-Bus
-          set_session_dbus
-      fi
     '';
-    sessionVariables = {
-      GPG_TTY = "$TTY";
-      PATH = "$PATH:$HOME/.pulumi/bin:$HOME/.local/bin:$HOME/.pyenv/bin:$HOME/go/bin";
-    };
     enableCompletion = true;
-    enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-
-      bfg = "java -jar ~/bfg-1.14.0.jar";
       # https://forum.endeavouros.com/t/exa-has-been-deprecated/45293/12
       # ls to eza
       ls = "eza --color=always --group-directories-first --icons"; # ls

@@ -3,28 +3,20 @@ return {
   event = "VeryLazy",
   build = "make",
   opts = {
-    -- add any opts here
-    -- provider = "azure",
-    -- auto_suggestions_provider = "azure",
     provider = "copilot",
     providers = {
       copilot = {
-        model = "gpt-4.1",
+        model = "gemini-2.5-pro",
       },
     },
-    -- azure = {
-    --   endpoint = "https://dchenkpmg-openai.openai.azure.com",
-    --   deployment = "dchenkpmg",
-    --   model = "dchenkpmg",
-    --   api_version = "2024-02-01",
-    --   max_tokens = 4096,
-    -- },
   },
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "stevearc/dressing.nvim",
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
+    "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+    "ibhagwan/fzf-lua", -- for file_selector provider fzf
+    "folke/snacks.nvim", -- for input provider snacks
     "zbirenbaum/copilot.lua", -- for providers='copilot'
     --- The below is optional, make sure to setup it properly if you have lazy=true
     {

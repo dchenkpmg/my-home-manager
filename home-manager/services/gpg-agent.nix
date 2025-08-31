@@ -1,7 +1,11 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   services.gpg-agent = {
-    enable = true;
+    enable = false;
     enableZshIntegration = true;
     defaultCacheTtl = 86400;
     maxCacheTtl = 86400;
