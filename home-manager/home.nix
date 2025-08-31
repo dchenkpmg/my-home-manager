@@ -17,6 +17,7 @@
     ./programs/fzf.nix
     ./programs/direnv.nix
     ./programs/bat.nix
+    ./programs/yazi.nix
     ./services/gpg-agent.nix
   ];
 in {
@@ -66,7 +67,6 @@ in {
       pkgs-unstable.duckdb
       pkgs-unstable.coursier
       pkgs-unstable.lsix
-      pkgs-unstable.yazi
       pkgs-unstable.circumflex
     ];
 
