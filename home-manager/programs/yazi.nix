@@ -14,8 +14,6 @@
         sha256 = "sha256-eDJ0CsLK0ED0zl3MGfd1JtVcmwDHlkaOnliKltNneOo=";
       };
     };
-    enableZshIntegration = true;
-    shellWrapperName = "y";
     theme = {
       flavor = {dark = "rose-pine";};
     };
