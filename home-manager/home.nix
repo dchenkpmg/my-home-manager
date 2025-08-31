@@ -17,7 +17,7 @@
     ./programs/fzf.nix
     ./programs/direnv.nix
     ./programs/bat.nix
-    # ./services/gpg-agent.nix
+    ./services/gpg-agent.nix
   ];
 in {
   imports = modules;
