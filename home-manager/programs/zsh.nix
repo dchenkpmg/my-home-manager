@@ -26,10 +26,17 @@
       source ~/.p10k.zsh
 
       function gumc() {
+        # Do not exit the whole shell on errors within this function
+        emulate -L zsh
+        setopt LOCAL_OPTIONS NO_ERR_EXIT LOCAL_TRAPS
+
+        # If user presses Ctrl-C at any prompt, abort this function cleanly
+        trap 'return 130' INT
+
         local TYPE SCOPE SUMMARY DESCRIPTION
 
         # Use gum to choose the type of change
-        TYPE=$(gum choose --cursor.foreground "#c4a7e7" --header.foreground "#c4a7e7" --selected.foreground "#f6c177" "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert")
+        TYPE=$(gum choose --cursor.foreground "#c4a7e7" --header.foreground "#c4a7e7" --selected.foreground "#f6c177" "fix" "feat" "docs" "style" "refactor" "test" "chore" "revert") || return 130
 
         # Use gum to input the scope
         # SCOPE=$(gum input --placeholder "scope")
@@ -37,16 +44,16 @@
         SCOPE=$(gum input \
             --placeholder "scope" \
             --cursor.foreground "#c4a7e7" \
-        )
+        ) || return 130
 
         # Since the scope is optional, wrap it in parentheses if it has a value
         test -n "$SCOPE" && SCOPE="($SCOPE)"
 
         # Pre-populate the input with the type(scope): so that the user may change it
-        SUMMARY=$(gum input --cursor.foreground "#c4a7e7" --value "$TYPE$SCOPE: " --placeholder "Summary of this change")
+        SUMMARY=$(gum input --cursor.foreground "#c4a7e7" --value "$TYPE$SCOPE: " --placeholder "Summary of this change") || return 130
 
         # Use gum to write the description
-        DESCRIPTION=$(gum write --cursor.foreground "#c4a7e7" --placeholder "Details of this change (ENTER to finish)")
+        DESCRIPTION=$(gum write --cursor.foreground "#c4a7e7" --placeholder "Details of this change (ENTER to finish)") || return 130
 
         # Commit these changes
         gum confirm \
@@ -55,7 +62,9 @@
           --selected.background="#f6c177" \
           --unselected.foreground="#6e6a86" \
           --unselected.background="#1f1d2e" \
-          "Commit changes?" && git commit -m "$SUMMARY" -m "$DESCRIPTION"
+          "Commit changes?" || return 130
+
+        git commit -m "$SUMMARY" -m "$DESCRIPTION"
       }
 
       # Preferred editor for local and remote sessions
