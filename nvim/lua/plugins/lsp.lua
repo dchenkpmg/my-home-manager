@@ -1,6 +1,6 @@
 return {
   { -- change nvim-lspconfig options
-    "nvim-lspconfig",
+    "neovim/nvim-lspconfig",
     opts = {
       diagnostics = {
         virtual_text = false,
