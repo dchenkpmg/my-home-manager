@@ -29,6 +29,8 @@
         fpath=(${pkgs.docker}/zsh/vendor-completions $fpath)
         source ~/.p10k.zsh
 
+        export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
         function gumc() {
           # Do not exit the whole shell on errors within this function
           emulate -L zsh
@@ -106,7 +108,7 @@
       "l." = "eza -a | grep -E '''^\\.'''";
 
       cd = "z";
-      interpreter = "interpreter --model azure/dchenkpmg --context_window=128000 --max_output=10000";
+      clx = "clx -n";
     };
     plugins = [
       {
