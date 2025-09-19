@@ -168,7 +168,7 @@ in {
 
 
       set -g mouse on
-
+      set-option -g status-position top
       set -g status-keys vi
       set -g mode-keys vi
 
