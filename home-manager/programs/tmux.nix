@@ -203,6 +203,19 @@ in {
       set -g allow-passthrough on
       set -ga update-environment TERM
       set -ga update-environment TERM_PROGRAM
+
+
+      # POPUP SHELL
+      bind C-t display-popup -T ' +#S ' -h 60% -E show-tmux-popup
+      # support detaching from nested session with the same shortcut
+      bind -T popup C-t detach
+      bind -T popup C-g copy-mode
+      set -g popup-border-lines rounded
+      set -g popup-border-style fg='#F6C177'
+      bind -T popup C-c new-window -c '#{pane_current_path}'
+      bind -T popup C-n next-window
+      bind -T popup C-b previous-window
+      bind -T popup C-l run 'tmux move-window -a -t $TMUX_PARENT_SESSION:{next}'
     '';
   };
 }
