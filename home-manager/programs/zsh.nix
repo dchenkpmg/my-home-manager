@@ -131,6 +131,7 @@
         "docker"
         "docker-compose"
         "poetry"
+        "poetry-env"
         "tmux"
       ];
     };

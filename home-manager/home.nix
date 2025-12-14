@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   pkgs-unstable,
   ...
@@ -81,17 +80,20 @@ in {
       pkgs-unstable.coursier
       pkgs-unstable.lsix
       pkgs-unstable.circumflex
+      pkgs-unstable.poetry
+      pkgs-unstable.statix
     ];
 
     homeDirectory = "/Users/${username}";
 
     stateVersion = "25.05";
-
-    file.".config/nvim".source = link "/Users/${username}/my-home-manager/nvim";
-    file.".p10k.zsh".source = link "/Users/${username}/my-home-manager/terminal/.p10k.zsh";
-    file.".markdownlint-cli2.yaml".text = ''
-      config:
-        MD013: false
-    '';
+    file = {
+      ".config/nvim".source = link "/Users/${username}/my-home-manager/nvim";
+      ".p10k.zsh".source = link "/Users/${username}/my-home-manager/terminal/.p10k.zsh";
+      ".markdownlint-cli2.yaml".text = ''
+        config:
+          MD013: false
+      '';
+    };
   };
 }
