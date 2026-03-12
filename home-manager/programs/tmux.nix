@@ -128,9 +128,12 @@ in {
       bind BTab switch-client -l  # move to last session
 
       # split current window horizontally
-      bind - split-window -v
+      bind _ split-window -h -c "#{pane_current_path}"
       # split current window vertically
-      bind _ split-window -h
+      bind - split-window -v -c "#{pane_current_path}"
+
+      # open new window on cwd
+      bind-key c new-window -c "#{pane_current_path}"
 
       # pane navigation
       bind -r h select-pane -L  # move left

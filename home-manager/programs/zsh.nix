@@ -29,7 +29,7 @@
         fpath=(${pkgs.docker}/zsh/vendor-completions $fpath)
         source ~/.p10k.zsh
 
-        export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+        export PATH="/Users/dychen/.local/bin/:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
         function gumc() {
           # Do not exit the whole shell on errors within this function
