@@ -45,15 +45,16 @@
 in {
   programs.tmux = {
     enable = true;
-    package = pkgs-unstable.tmux.overrideAttrs (finalAttrs: previousAttrs: {
-      version = "865117a05fa1e850da07f67b422a469ee58fe019";
-      src = pkgs.fetchFromGitHub {
-        owner = "tmux";
-        repo = "tmux";
-        rev = finalAttrs.version;
-        sha256 = "sha256-hjiNXGMlUC+jjPvw9a6EXUAGuHbGwRFY0cGi4/K+lak="; # Updated hash
-      };
-    });
+    # package = pkgs-unstable.tmux.overrideAttrs (finalAttrs: previousAttrs: {
+    #   version = "865117a05fa1e850da07f67b422a469ee58fe019";
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "tmux";
+    #     repo = "tmux";
+    #     rev = finalAttrs.version;
+    #     sha256 = "sha256-hjiNXGMlUC+jjPvw9a6EXUAGuHbGwRFY0cGi4/K+lak="; # Updated hash
+    #   };
+    # });
+    package = pkgs-unstable.tmux;
     plugins = with pkgs; [
       {
         plugin = pkgs-unstable.tmuxPlugins.fingers;

@@ -127,7 +127,7 @@
       package = pkgs-unstable.oh-my-zsh;
       plugins = [
         "git"
-        "direnv"
+        # "direnv"
         "docker"
         "docker-compose"
         "poetry"
