@@ -6,7 +6,7 @@
   ...
 }: {
   programs.direnv = {
-    enable = false;
+    enable = true;
     enableZshIntegration = true;
     package = pkgs-unstable.direnv;
   };
