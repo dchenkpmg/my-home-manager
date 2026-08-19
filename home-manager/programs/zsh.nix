@@ -8,6 +8,7 @@
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
+    package = pkgs-unstable.zsh;
 
     initContent = lib.mkMerge [
       (lib.mkOrder 550 ''
@@ -91,6 +92,10 @@
         }
       ''
     ];
+    history = {
+      size = 100000000;
+      save = 100000000;
+    };
 
     enableCompletion = true;
     syntaxHighlighting.enable = true;

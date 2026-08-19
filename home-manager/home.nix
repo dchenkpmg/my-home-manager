@@ -82,6 +82,8 @@ in {
       pkgs-unstable.circumflex
       pkgs-unstable.poetry
       pkgs-unstable.statix
+      pkgs-unstable.google-cloud-sdk
+      pkgs-unstable.ffmpeg
     ];
 
     homeDirectory = "/Users/${username}";
