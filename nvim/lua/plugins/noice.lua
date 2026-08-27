@@ -3,14 +3,7 @@ vim.pack.add({
 	"https://github.com/MunifTanjim/nui.nvim",
 })
 
--- if vim.o.filetype == "lazy" then
--- 	vim.cmd([[messages clear]])
--- end
-
 require("noice").setup({
-	cmdline = {
-		view = "cmdline",
-	},
 	lsp = {
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -35,6 +28,7 @@ require("noice").setup({
 		bottom_search = true,
 		command_palette = true,
 		long_message_to_split = true,
+		lsp_doc_border = true,
 	},
 })
 

@@ -10,16 +10,14 @@ wk.add({
 	{ "<leader><tab>", group = "tabs" },
 	{ "<leader>c", group = "code" },
 	{ "<leader>d", group = "debug" },
-	-- { "<leader>D", group = "Diffview", icon = { icon = "", color = "orange" } },
-	-- { "<leader>p", group = "Yanky", icon = { icon = "󰃮 ", color = "yellow" } },
 	{ "<leader>dp", group = "profiler" },
 	{ "<leader>f", group = "file/find" },
 	{ "<leader>g", group = "git" },
 	{ "<leader>gh", group = "hunks" },
 	{ "<leader>q", group = "quit/session" },
 	{ "<leader>s", group = "search" },
-	{ "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
-	{ "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+	{ "<leader>u", group = "ui" },
+	{ "<leader>x", group = "diagnostics/quickfix" },
 	{ "[", group = "prev" },
 	{ "]", group = "next" },
 	{ "g", group = "goto" },
@@ -86,13 +84,5 @@ wk.add({
 			end,
 			desc = "Window Hydra Mode (which-key)",
 		},
-	},
-	{
-		-- Nested mappings are allowed and can be added in any order
-		-- Most attributes can be inherited or overridden on any level
-		-- There's no limit to the depth of nesting
-		mode = { "n", "v" }, -- NORMAL and VISUAL mode
-		{ "<leader>q", "<cmd>q<cr>", desc = "Quit" }, -- no need to specify mode since it's inherited
-		{ "<leader>w", "<cmd>w<cr>", desc = "Write" },
 	},
 })

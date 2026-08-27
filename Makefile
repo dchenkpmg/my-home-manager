@@ -1,8 +1,11 @@
-.PHONY: switch
-switch:
+.PHONY: switch update clean
+
+switch: update
 	home-manager switch --flake .#dylanchen1
 
-.PHONY: clean
+update:
+	nix flake update
+
 clean:
 	nix-collect-garbage -d
 

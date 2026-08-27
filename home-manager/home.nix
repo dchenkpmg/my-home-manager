@@ -84,6 +84,9 @@ in {
       pkgs-unstable.statix
       pkgs-unstable.google-cloud-sdk
       pkgs-unstable.ffmpeg
+      pkgs-unstable.pnpm
+      pkgs-unstable.pulumi
+      pkgs-unstable.pulumiPackages.pulumi-nodejs
     ];
 
     homeDirectory = "/Users/${username}";

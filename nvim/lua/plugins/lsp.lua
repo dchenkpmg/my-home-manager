@@ -27,10 +27,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		-- nowait: `gr` would otherwise wait on the default grr/grn/gra/gri/grt maps
-		map("gr", vim.lsp.buf.references, "References", "n", { nowait = true })
-		map("gI", vim.lsp.buf.implementation, "Goto Implementation")
-		map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
-		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+		-- map("gr", vim.lsp.buf.references, "References", "n", { nowait = true })
+		-- map("gI", vim.lsp.buf.implementation, "Goto Implementation")
+		-- map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
+		-- map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 		map("K", vim.lsp.buf.hover, "Hover")
 
 		if supports("textDocument/definition") then
