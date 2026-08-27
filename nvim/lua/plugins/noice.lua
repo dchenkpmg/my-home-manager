@@ -32,6 +32,79 @@ require("noice").setup({
 	},
 })
 
+-- vibe-coded hacks to fix noice confirm prompt
+local function monkey_patch()
+	local M = require("noice.ui.cmdline")
+	local State = require("noice.ui.state")
+	local Manager = require("noice.message.manager")
+	local Hacks = require("noice.util.hacks")
+
+	M.message_in = false
+
+	local original_show = M.on_show
+
+	M.on_show = function(event, content, pos, firstc, prompt, indent, level)
+		M.message_in = true
+
+		if M.confirm_message and State.skip(event, content, pos, firstc, prompt, indent, level) then
+			return
+		end
+
+		if M.confirm_message then
+			M.skipped = true
+
+			local message = M.confirm_message
+			-- put the [Y]es/(N)o/(C)ancel prompt on its own line
+			message:newline()
+			message:append(prompt)
+			Manager.add(message)
+
+			-- the dialog places no cursor of its own, so stop the real one
+			-- from blinking in the buffer behind it
+			Hacks.hide_cursor()
+
+			M._on_hide = function()
+				vim.schedule(function()
+					Manager.remove(message)
+					State.clear(event)
+					State.clear(message.event)
+					M.confirm_message = nil
+					M.skipped = false
+					Hacks.show_cursor()
+				end)
+			end
+
+			return
+		end
+
+		original_show(event, content, pos, firstc, prompt, indent, level)
+	end
+
+	local original_hide = M.on_hide
+
+	M.on_hide = function(event, level)
+		M.message_in = false
+
+		if M._on_hide then
+			vim.defer_fn(function()
+				if not M.message_in then
+					M._on_hide()
+					M._on_hide = nil
+				end
+			end, 10)
+
+			return
+		end
+
+		-- safety net: no-op unless the confirm branch hid it
+		Hacks.show_cursor()
+		original_hide(event, level)
+	end
+end
+
+monkey_patch()
+-- end of vibe-coded hacks to fix noice confirm prompt
+
 -- Keymaps
 -- stylua: ignore start
 vim.keymap.set({ "n" }, "<leader>sn", "", { desc = "+noice" })
