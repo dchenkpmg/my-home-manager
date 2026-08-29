@@ -6,20 +6,15 @@ vim.pack.add({
 local Snacks = require("snacks")
 
 Snacks.setup({
-	explorer = { enabled = true },
-	image = { enabled = true },
+	bigfile = { enabled = true },
+	explorer = { enabled = true, replace_netrw = false, trash = true },
 	indent = { enabled = true },
-	layout = { enabled = true },
 	notifier = { enabled = true },
 	quickfile = { enabled = true },
-	scope = { enabled = true },
-	scratch = { enabled = true },
-	scroll = { enabled = true },
 	statuscolumn = { enabled = true },
 	terminal = { enabled = true },
 	toggle = { enabled = true },
-	words = { enabled = false },
-	zen = { enabled = true },
+	words = { enabled = true },
 
 	picker = {
 		sources = {
@@ -143,7 +138,6 @@ vim.api.nvim_create_autocmd("User", {
 		Snacks.toggle.profiler():map("<leader>dpp")
 		Snacks.toggle.profiler_highlights():map("<leader>dph")
 		Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
-		Snacks.toggle.zen():map("<leader>uz")
 	end,
 })
 
@@ -232,17 +226,10 @@ local keymaps = {
     { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
     { "<c-_>", function() Snacks.terminal(nil, { cwd = vim.fn.getcwd() }) end, desc = "which_key_ignore",  mode = "n", },
     -- Other
-    { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-    { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
-    { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-    { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
     { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
-    { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
-    { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
     { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
     { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
 }

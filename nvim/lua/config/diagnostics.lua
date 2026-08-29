@@ -12,10 +12,10 @@ vim.diagnostic.config({
 	-- keep signs & virtual text, but tune them as you like
 	signs = {
 		text = {
-			[sev.ERROR] = "",
-			[sev.WARN] = "",
-			[sev.INFO] = "",
-			[sev.HINT] = "",
+			[sev.ERROR] = "",
+			[sev.WARN] = "",
+			[sev.INFO] = "",
+			[sev.HINT] = "",
 		},
 	},
 	virtual_text = {
