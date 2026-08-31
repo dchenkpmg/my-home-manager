@@ -70,7 +70,7 @@ in {
           set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}  '
         '';
       }
-      tmux-mode-indicator
+      pkgs-unstable.tmuxPlugins.mode-indicator
       {
         plugin = pkgs-unstable.tmuxPlugins.resurrect;
         extraConfig = ''
@@ -78,8 +78,8 @@ in {
         '';
       }
       pkgs-unstable.tmuxPlugins.continuum
-      tmuxPlugins.better-mouse-mode
-      tmuxPlugins.yank
+      pkgs-unstable.tmuxPlugins.better-mouse-mode
+      pkgs-unstable.tmuxPlugins.yank
     ];
     prefix = "C-a";
     extraConfig = ''
