@@ -1,6 +1,6 @@
 .PHONY: switch update clean
 
-switch: update
+switch:
 	home-manager switch --flake .#dylanchen1
 
 update:

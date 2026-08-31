@@ -20,10 +20,6 @@ require("bufferline").setup({
 				.. (diag.warning and " " .. diag.warning or "")
 			return vim.trim(ret)
 		end,
-		get_element_icon = function(element)
-			local icon, hl = require("nvim-web-devicons").get_icon_by_filetype(element.filetype, { default = false })
-			return icon, hl
-		end,
 	},
 })
 

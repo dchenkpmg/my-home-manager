@@ -23,6 +23,7 @@ opt.ignorecase = true -- Case insensitive search
 opt.smartcase = true -- Case sensitive if uppercase in search
 opt.hlsearch = false -- Don't highlight search results NOT IN LAZYVIM
 opt.incsearch = true -- Show matches as you type NOT IN LAZYVIM
+opt.inccommand = "nosplit" -- Preview substitutions in the current buffer
 
 -- Visual settings
 opt.termguicolors = true -- Enable 24-bit colors
@@ -55,6 +56,18 @@ opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to qu
 opt.ttimeoutlen = 0 -- Key code timeout NOT IN LAZYVIM
 opt.autoread = true -- Auto reload files changed outside vim NOT IN LAZYVIM
 opt.autowrite = true -- Auto save
+opt.sessionoptions = {
+	"blank",
+	"buffers",
+	"curdir",
+	"folds",
+	"help",
+	"tabpages",
+	"winsize",
+	"winpos",
+	"terminal",
+	"localoptions",
+}
 
 -- Behavior settings
 opt.hidden = true -- Allow hidden buffers NOT IN LAZYVIM
@@ -68,11 +81,13 @@ opt.mouse = "a" -- Enable mouse support
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 opt.modifiable = true -- Allow buffer modifications NOT IN LAZYVIM
 opt.encoding = "UTF-8" -- Set encoding NOT IN LAZYVIM
+opt.spelllang = { "en" }
 
 -- Folding settings
 opt.smoothscroll = true
 vim.wo.foldmethod = "expr" -- NOT IN LAZYVIM
 opt.foldlevel = 99 -- Start with all folds open
+opt.foldtext = ""
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -97,19 +112,19 @@ opt.maxmempattern = 20000 -- NOT IN LAZYVIM
 -- Create undo directory if it doesn't exist
 local undodir = vim.fn.expand("~/.vim/undodir") -- NOT IN LAZYVIM
 if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mkdir(undodir, "p")
+	vim.fn.mkdir(undodir, "p")
 end
 
 vim.g.autoformat = true
 vim.g.trouble_lualine = true
 
 opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+	foldopen = "",
+	foldclose = "",
+	fold = " ",
+	foldsep = " ",
+	diff = "╱",
+	eob = " ",
 }
 
 opt.jumpoptions = "view"
@@ -124,15 +139,15 @@ opt.shortmess:append({ W = true, I = true, c = true, C = true })
 vim.g.markdown_recommended_style = 0
 
 vim.filetype.add({ -- NOT IN LAZYVIM
-  extension = {
-    env = "dotenv",
-  },
-  filename = {
-    [".env"] = "dotenv",
-    ["env"] = "dotenv",
-  },
-  pattern = {
-    ["[jt]sconfig.*.json"] = "jsonc",
-    ["%.env%.[%w_.-]+"] = "dotenv",
-  },
+	extension = {
+		env = "dotenv",
+	},
+	filename = {
+		[".env"] = "dotenv",
+		["env"] = "dotenv",
+	},
+	pattern = {
+		["[jt]sconfig.*.json"] = "jsonc",
+		["%.env%.[%w_.-]+"] = "dotenv",
+	},
 })

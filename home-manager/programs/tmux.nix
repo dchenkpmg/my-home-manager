@@ -9,25 +9,25 @@
     pkgs.tmuxPlugins.mkTmuxPlugin
     {
       pluginName = "tmux-super-fingers";
-      version = "unstable-2023-01-06";
+      version = "unstable-2026-04-24";
       src = pkgs.fetchFromGitHub {
         owner = "artemave";
         repo = "tmux_super_fingers";
-        rev = "2c12044984124e74e21a5a87d00f844083e4bdf7";
-        sha256 = "sha256-cPZCV8xk9QpU49/7H8iGhQYK6JwWjviL29eWabuqruc=";
+        rev = "523dc9b7a79f1ceb8d9be72e22c263c4a7cd3bdf";
+        sha256 = "sha256-GiOkSADuWz19ndsVlKiKatPnplUpmukoZTPakIXWqF0=";
       };
     };
   tmux-rose-pine =
     pkgs.tmuxPlugins.mkTmuxPlugin
     {
       pluginName = "rose-pine";
-      version = "unstable-2024-08-25";
+      version = "unstable-2026-07-23";
       rtpFilePath = "rose-pine.tmux";
       src = pkgs.fetchFromGitHub {
         owner = "rose-pine";
         repo = "tmux";
-        rev = "5bf885fe2e181e9763d92d9c522b0526e901e449";
-        sha256 = "sha256-YnpWvW0iWANB0snVhLKBTnOXlD3LQfbeoSFeae7SJ0c=";
+        rev = "43d03507427ac3ad92cadfdf0d1307b8b0ff5128";
+        sha256 = "sha256-niFXeZRyJ26ukNxEgQjzGbNPPQPtpoe5/7cF/9VGOTk=";
       };
     };
   tmux-mode-indicator =
@@ -45,15 +45,6 @@
 in {
   programs.tmux = {
     enable = true;
-    # package = pkgs-unstable.tmux.overrideAttrs (finalAttrs: previousAttrs: {
-    #   version = "865117a05fa1e850da07f67b422a469ee58fe019";
-    #   src = pkgs.fetchFromGitHub {
-    #     owner = "tmux";
-    #     repo = "tmux";
-    #     rev = finalAttrs.version;
-    #     sha256 = "sha256-hjiNXGMlUC+jjPvw9a6EXUAGuHbGwRFY0cGi4/K+lak="; # Updated hash
-    #   };
-    # });
     package = pkgs-unstable.tmux;
     plugins = with pkgs; [
       {
@@ -75,8 +66,8 @@ in {
           set -g @rose_pine_bar_bg_disabled_color_option 'default'
           set -g @rose_pine_show_current_program 'on' # Forces tmux to show the current running program as window name
           set -g @rose_pine_show_pane_directory 'on' # Forces tmux to show the current directory as
-          set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it updates with prefix + I
-          set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}'
+          set -g @rose_pine_field_separator '  ' # Default is two-space-padded, but can be set to anything
+          set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}  '
         '';
       }
       tmux-mode-indicator
@@ -109,7 +100,7 @@ in {
       set -g renumber-windows on    # renumber windows when a window is closed
 
       set -g set-titles on          # set terminal title
-      set -g set-titles-string "🌐 #h 📂 #S 🔢 #I 📝 #W"
+      set -g set-titles-string "#W"
 
       set -g display-panes-time 800 # slightly longer pane indicators display time
       set -g display-time 1000      # slightly longer status messages display time
@@ -170,22 +161,16 @@ in {
       bind p paste-buffer -p  # paste from the top paste buffer
       bind P choose-buffer    # choose which buffer to paste from
 
-
       set -g mouse on
       set-option -g status-position top
       set -g status-keys vi
       set -g mode-keys vi
-
 
       set -g default-terminal "tmux-256color"
       set-option -a terminal-features ',xterm-256color:RGB'
 
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
-
-      if-shell 'test -n "$WSL_DISTRO_NAME"' {
-        set -as terminal-overrides ',*:Setulc=\E[58::2::::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m' # underscore colours - needs tmux-3.0 (wsl2 in Windows Terminal)
-      }
 
       %if #{==:#{TMUX_PROGRAM},}
         run 'TMUX_PROGRAM="''$(LSOF=''$(PATH="''$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" command -v lsof); ''$LSOF -b -w -a -d txt -p #{pid} -Fn 2>/dev/null | perl -n -e "if (s/^n((?:.(?!dylib$|so$))+)$/\1/g && s/(?:\s+\([^\s]+?\))?$//g) { print; exit } } exit 1; {" || readlink "/proc/#{pid}/exe" 2>/dev/null || printf tmux)"; "''$TMUX_PROGRAM" -S #{socket_path} set-environment -g TMUX_PROGRAM "''$TMUX_PROGRAM"'
@@ -199,7 +184,6 @@ in {
         run '"''$TMUX_PROGRAM" set-environment -g TMUX_CONF ''$(for conf in "''$HOME/.tmux.conf" "''$XDG_CONFIG_HOME/tmux/tmux.conf" "''$HOME/.config/tmux/tmux.conf"; do [ -f "''$conf" ] && printf "%s" "''$conf" && break; done)'
       %endif
 
-
       # Bind keys to split windows while retaining the current path
       bind-key % split-window -h -c "#{pane_current_path}"
       bind-key '"' split-window -v -c "#{pane_current_path}"
@@ -207,19 +191,6 @@ in {
       set -g allow-passthrough on
       set -ga update-environment TERM
       set -ga update-environment TERM_PROGRAM
-
-
-      # POPUP SHELL
-      bind C-t display-popup -T ' +#S ' -h 60% -E show-tmux-popup
-      # support detaching from nested session with the same shortcut
-      bind -T popup C-t detach
-      bind -T popup C-g copy-mode
-      set -g popup-border-lines rounded
-      set -g popup-border-style fg='#F6C177'
-      bind -T popup C-c new-window -c '#{pane_current_path}'
-      bind -T popup C-n next-window
-      bind -T popup C-b previous-window
-      bind -T popup C-l run 'tmux move-window -a -t $TMUX_PARENT_SESSION:{next}'
     '';
   };
 }

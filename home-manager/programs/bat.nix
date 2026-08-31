@@ -16,10 +16,10 @@
         src = pkgs.fetchFromGitHub {
           owner = "rose-pine";
           repo = "tm-theme";
-          rev = "c4cab0c431f55a3c4f9897407b7bdad363bbb862";
-          sha256 = "sha256-maQp4QTJOlK24eid7mUsoS7kc8P0gerKcbvNaxO8Mic=";
+          rev = "6d556734541ccb04172e81fd58de4a35fff72d19";
+          sha256 = "sha256-5+fG21KbB7bdPvszkz9Ftl6fCDGs17fJNTAXFRFWZGo=";
         };
-        file = "dist/themes/rose-pine.tmTheme";
+        file = "dist/rose-pine.tmTheme";
       };
     };
   };

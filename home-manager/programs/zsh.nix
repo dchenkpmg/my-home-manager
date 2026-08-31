@@ -30,8 +30,6 @@
         fpath=(${pkgs.docker}/zsh/vendor-completions $fpath)
         source ~/.p10k.zsh
 
-        export PATH="/Users/dychen/.local/bin/:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
         function gumc() {
           # Do not exit the whole shell on errors within this function
           emulate -L zsh
@@ -80,16 +78,6 @@
         else
           export EDITOR='nvim'
         fi
-
-
-        function awsauth {
-          ~/seek/aws-auth-bash/auth.sh "$@";
-          script_result="$?"
-
-          [[ -r "$HOME/.aws/sessiontoken" ]] && . "$HOME/.aws/sessiontoken";
-
-          return "$script_result"
-        }
       ''
     ];
     history = {
@@ -113,7 +101,6 @@
       "l." = "eza -a | grep -E '''^\\.'''";
 
       cd = "z";
-      clx = "clx -n";
     };
     plugins = [
       {

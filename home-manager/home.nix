@@ -24,19 +24,6 @@ in {
   home = {
     inherit username;
     packages = with pkgs; [
-      (pkgs.writeShellScriptBin "show-tmux-popup" ''
-        #!/bin/bash
-        session="$(tmux display -p '_popup_#S')"
-        if ! tmux has -t "$session" 2>/dev/null; then
-          parent_session="$(tmux display -p '#{session_id}')"
-          session_id="$(tmux new-session -c '#{pane_current_path}' -dP -s "$session" -F '#{session_id}' -e TMUX_PARENT_SESSION="$parent_session")"
-          exec tmux set-option -t "$session_id" key-table popup \; \
-            set-option -t "$session_id" status off \; \
-            set-option -t "$session_id" prefix None \; \
-            attach -t "$session"
-        fi
-        exec tmux attach -t "$session" >/dev/null
-      '')
       home-manager
       eza
       docker
@@ -67,7 +54,6 @@ in {
       unzip
       pkgs-unstable.cargo
       tree-sitter
-      neofetch
       pkgs-unstable.lazygit
       pkgs-unstable.ttyper
       pkgs-unstable.go
@@ -79,7 +65,6 @@ in {
       pkgs-unstable.duckdb
       pkgs-unstable.coursier
       pkgs-unstable.lsix
-      pkgs-unstable.circumflex
       pkgs-unstable.poetry
       pkgs-unstable.statix
       pkgs-unstable.google-cloud-sdk

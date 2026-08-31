@@ -6,7 +6,7 @@
   ...
 }: {
   programs.zathura = {
-    enable = true;
+    enable = false;
     options = {
       selection-clipboard = "clipboard";
 
