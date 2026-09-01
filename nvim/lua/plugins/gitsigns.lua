@@ -18,6 +18,7 @@ require("gitsigns").setup({
 		topdelete = { text = "" },
 		changedelete = { text = "▎" },
 	},
+	current_line_blame = true,
 	on_attach = function(buffer)
 		local gs = require("gitsigns")
 
