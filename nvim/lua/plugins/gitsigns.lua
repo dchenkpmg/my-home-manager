@@ -19,6 +19,9 @@ require("gitsigns").setup({
 		changedelete = { text = "▎" },
 	},
 	current_line_blame = true,
+	current_line_blame_opts = {
+		virt_text = false,
+	},
 	on_attach = function(buffer)
 		local gs = require("gitsigns")
 

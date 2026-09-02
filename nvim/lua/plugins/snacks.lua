@@ -6,14 +6,13 @@ vim.pack.add({
 local Snacks = require("snacks")
 
 Snacks.setup({
-	bigfile = { enabled = true },
-	explorer = { enabled = true, replace_netrw = false, trash = true },
-	indent = { enabled = true },
-	notifier = { enabled = true },
-	quickfile = { enabled = true },
-	statuscolumn = { enabled = true },
-	toggle = { enabled = true },
-	words = { enabled = true },
+	bigfile = {},
+	explorer = { replace_netrw = false, trash = true },
+	indent = {},
+	notifier = {},
+	quickfile = {},
+	statuscolumn = {},
+	words = {},
 
 	picker = {
 		sources = {
@@ -85,8 +84,6 @@ Snacks.setup({
 			},
 			grep_buffers = {},
 			explorer = {
-				hidden = true,
-				ignored = true,
 				supports_live = true,
 				auto_close = true,
 				diagnostics = true,
