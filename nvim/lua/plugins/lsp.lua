@@ -26,16 +26,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			return client:supports_method(method, event.buf)
 		end
 
-		-- nowait: `gr` would otherwise wait on the default grr/grn/gra/gri/grt maps
-		-- map("gr", vim.lsp.buf.references, "References", "n", { nowait = true })
-		-- map("gI", vim.lsp.buf.implementation, "Goto Implementation")
-		-- map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
-		-- map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 		map("K", vim.lsp.buf.hover, "Hover")
-
-		if supports("textDocument/definition") then
-			map("gd", vim.lsp.buf.definition, "Goto Definition")
-		end
 
 		if supports("textDocument/signatureHelp") then
 			map("gK", vim.lsp.buf.signature_help, "Signature Help")
@@ -100,17 +91,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --  See `:help lsp-config` for information about keys and how to configure
 ---@type table<string, vim.lsp.Config>
 local servers = {
-	-- clangd = {},
-	-- gopls = {},
-	-- pyright = {},
-	-- rust_analyzer = {},
-	--
-	-- Some languages (like typescript) have entire language plugins that can be useful:
-	--    https://github.com/pmizio/typescript-tools.nvim
-	--
-	-- But for many setups, the LSP (`ts_ls`) will work just fine
-	-- ts_ls = {},
-
+	pyright = {
+		capabilities = {
+			textDocument = {
+				publishDiagnostics = {
+					tagSupport = {
+						valueSet = { 2 },
+					},
+				},
+			},
+		},
+	},
+	ruff = {},
 	stylua = {}, -- Used to format Lua code
 
 	-- Special Lua Config, as recommended by neovim help docs
