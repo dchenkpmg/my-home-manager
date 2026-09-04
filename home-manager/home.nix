@@ -3,7 +3,8 @@
   pkgs,
   pkgs-unstable,
   ...
-}: let
+}:
+let
   username = "dychen";
   link = config.lib.file.mkOutOfStoreSymlink;
   modules = [
@@ -19,7 +20,8 @@
     ./programs/yazi.nix
     ./services/gpg-agent.nix
   ];
-in {
+in
+{
   imports = modules;
   home = {
     inherit username;
@@ -53,7 +55,7 @@ in {
       wget
       unzip
       pkgs-unstable.cargo
-      tree-sitter
+      pkgs-unstable.tree-sitter
       pkgs-unstable.lazygit
       pkgs-unstable.ttyper
       pkgs-unstable.go
@@ -66,7 +68,7 @@ in {
       pkgs-unstable.coursier
       pkgs-unstable.lsix
       pkgs-unstable.poetry
-      pkgs-unstable.statix
+      pkgs-unstable.nixfmt
       pkgs-unstable.google-cloud-sdk
       pkgs-unstable.ffmpeg
       pkgs-unstable.pnpm

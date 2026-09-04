@@ -4,58 +4,52 @@
   pkgs,
   pkgs-unstable,
   ...
-}: let
-  tmux-super-fingers =
-    pkgs.tmuxPlugins.mkTmuxPlugin
-    {
-      pluginName = "tmux-super-fingers";
-      version = "unstable-2026-04-24";
-      src = pkgs.fetchFromGitHub {
-        owner = "artemave";
-        repo = "tmux_super_fingers";
-        rev = "523dc9b7a79f1ceb8d9be72e22c263c4a7cd3bdf";
-        sha256 = "sha256-GiOkSADuWz19ndsVlKiKatPnplUpmukoZTPakIXWqF0=";
-      };
+}:
+let
+  tmux-super-fingers = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-super-fingers";
+    version = "unstable-2026-04-24";
+    src = pkgs.fetchFromGitHub {
+      owner = "artemave";
+      repo = "tmux_super_fingers";
+      rev = "523dc9b7a79f1ceb8d9be72e22c263c4a7cd3bdf";
+      sha256 = "sha256-GiOkSADuWz19ndsVlKiKatPnplUpmukoZTPakIXWqF0=";
     };
-  tmux-rose-pine =
-    pkgs.tmuxPlugins.mkTmuxPlugin
-    {
-      pluginName = "rose-pine";
-      version = "unstable-2026-07-23";
-      rtpFilePath = "rose-pine.tmux";
-      src = pkgs.fetchFromGitHub {
-        owner = "rose-pine";
-        repo = "tmux";
-        rev = "43d03507427ac3ad92cadfdf0d1307b8b0ff5128";
-        sha256 = "sha256-niFXeZRyJ26ukNxEgQjzGbNPPQPtpoe5/7cF/9VGOTk=";
-      };
+  };
+  tmux-rose-pine = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "rose-pine";
+    version = "unstable-2026-07-23";
+    rtpFilePath = "rose-pine.tmux";
+    src = pkgs.fetchFromGitHub {
+      owner = "rose-pine";
+      repo = "tmux";
+      rev = "43d03507427ac3ad92cadfdf0d1307b8b0ff5128";
+      sha256 = "sha256-niFXeZRyJ26ukNxEgQjzGbNPPQPtpoe5/7cF/9VGOTk=";
     };
-  tmux-mode-indicator =
-    pkgs.tmuxPlugins.mkTmuxPlugin
-    {
-      pluginName = "mode-indicator";
-      version = "unstable-2024-08-25";
-      src = pkgs.fetchFromGitHub {
-        owner = "MunifTanjim";
-        repo = "tmux-mode-indicator";
-        rev = "7027903adca37c54cb8f5fa99fc113b11c23c2c4";
-        sha256 = "sha256-SAzsn4LoG8Ju5t13/U3/ctlJQPyPgv2FjpPkWSeKbP0=";
-      };
+  };
+  tmux-mode-indicator = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "mode-indicator";
+    version = "unstable-2024-08-25";
+    src = pkgs.fetchFromGitHub {
+      owner = "MunifTanjim";
+      repo = "tmux-mode-indicator";
+      rev = "7027903adca37c54cb8f5fa99fc113b11c23c2c4";
+      sha256 = "sha256-SAzsn4LoG8Ju5t13/U3/ctlJQPyPgv2FjpPkWSeKbP0=";
     };
-  vim-tmux-navigator =
-    pkgs.tmuxPlugins.mkTmuxPlugin
-    {
-      pluginName = "vim-tmux-navigator";
-      version = "unstable-2026-01-26";
-      rtpFilePath = "vim-tmux-navigator.tmux";
-      src = pkgs.fetchFromGitHub {
-        owner = "christoomey";
-        repo = "vim-tmux-navigator";
-        rev = "e41c431a0c7b7388ae7ba341f01a0d217eb3a432";
-        sha256 = "sha256-efqiRffnidYx+qjgsHyWshCFWgZp/ZrHl+Clt04pfpM=";
-      };
+  };
+  vim-tmux-navigator = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "vim-tmux-navigator";
+    version = "unstable-2026-01-26";
+    rtpFilePath = "vim-tmux-navigator.tmux";
+    src = pkgs.fetchFromGitHub {
+      owner = "christoomey";
+      repo = "vim-tmux-navigator";
+      rev = "e41c431a0c7b7388ae7ba341f01a0d217eb3a432";
+      sha256 = "sha256-efqiRffnidYx+qjgsHyWshCFWgZp/ZrHl+Clt04pfpM=";
     };
-in {
+  };
+in
+{
   programs.tmux = {
     enable = true;
     package = pkgs-unstable.tmux;

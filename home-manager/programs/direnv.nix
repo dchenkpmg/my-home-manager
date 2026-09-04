@@ -4,7 +4,8 @@
   pkgs,
   pkgs-unstable,
   ...
-}: {
+}:
+{
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;

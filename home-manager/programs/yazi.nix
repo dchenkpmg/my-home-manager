@@ -2,7 +2,8 @@
   pkgs,
   pkgs-unstable,
   ...
-}: {
+}:
+{
   programs.yazi = {
     enable = false;
     package = pkgs-unstable.yazi;
@@ -15,7 +16,9 @@
       };
     };
     theme = {
-      flavor = {dark = "rose-pine";};
+      flavor = {
+        dark = "rose-pine";
+      };
     };
   };
 }
