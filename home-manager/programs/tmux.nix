@@ -42,14 +42,25 @@
         sha256 = "sha256-SAzsn4LoG8Ju5t13/U3/ctlJQPyPgv2FjpPkWSeKbP0=";
       };
     };
+  vim-tmux-navigator =
+    pkgs.tmuxPlugins.mkTmuxPlugin
+    {
+      pluginName = "vim-tmux-navigator";
+      version = "unstable-2026-01-26";
+      rtpFilePath = "vim-tmux-navigator.tmux";
+      src = pkgs.fetchFromGitHub {
+        owner = "christoomey";
+        repo = "vim-tmux-navigator";
+        rev = "e41c431a0c7b7388ae7ba341f01a0d217eb3a432";
+        sha256 = "sha256-efqiRffnidYx+qjgsHyWshCFWgZp/ZrHl+Clt04pfpM=";
+      };
+    };
 in {
   programs.tmux = {
     enable = true;
     package = pkgs-unstable.tmux;
     plugins = with pkgs; [
-      {
-        plugin = pkgs-unstable.tmuxPlugins.fingers;
-      }
+      pkgs-unstable.tmuxPlugins.fingers
       {
         plugin = tmux-super-fingers;
         extraConfig = "set -g @super-fingers-key f";
@@ -70,7 +81,7 @@ in {
           set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}  '
         '';
       }
-      pkgs-unstable.tmuxPlugins.mode-indicator
+      tmux-mode-indicator
       {
         plugin = pkgs-unstable.tmuxPlugins.resurrect;
         extraConfig = ''
@@ -80,6 +91,7 @@ in {
       pkgs-unstable.tmuxPlugins.continuum
       pkgs-unstable.tmuxPlugins.better-mouse-mode
       pkgs-unstable.tmuxPlugins.yank
+      vim-tmux-navigator
     ];
     prefix = "C-a";
     extraConfig = ''
