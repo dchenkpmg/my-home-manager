@@ -3,5 +3,5 @@ vim.pack.add({
 })
 
 require("auto-session").setup({
-  close_filetypes_on_save = { "checkhealth", "sidekick_terminal" },
+	close_filetypes_on_save = { "checkhealth", "sidekick_terminal" },
 })

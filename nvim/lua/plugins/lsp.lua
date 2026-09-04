@@ -123,7 +123,9 @@ local servers = {
 			fixKind = "all",
 		},
 	},
-	metals = {},
+	metals = {}, -- install metals outside of mason
+	nil_ls = {},
+	marksman = {},
 	-- Special Lua Config, as recommended by neovim help docs
 	lua_ls = {
 		on_init = function(client)
@@ -190,6 +192,9 @@ end, vim.tbl_keys(servers or {}))
 vim.list_extend(ensure_installed, {
 	-- Formatters and other tools that are not LSP servers
 	"oxfmt",
+	"markdownlint-cli2",
+	"markdown-toc",
+	"prettier",
 })
 
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

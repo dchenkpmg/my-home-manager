@@ -6,6 +6,7 @@ local lint = require("lint")
 
 lint.linters_by_ft = {
 	sh = { "shellcheck" },
+	markdown = { "markdownlint-cli2" },
 }
 
 lint.linters["markdownlint-cli2"].args = {

@@ -1,3 +1,9 @@
+local utils = require("utils")
+
+utils.update_handler("nvim-treesitter", function()
+	vim.cmd("TSUpdate")
+end)
+
 vim.pack.add({ { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" } })
 
 -- Ensure basic parsers are installed
@@ -53,21 +59,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		else
 			-- Try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
 			treesitter_try_attach(buf, language)
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("PackChanged", {
-	desc = "Handle nvim-treesitter updates",
-	group = vim.api.nvim_create_augroup("nvim-treesitter-pack-changed-update-handler", { clear = true }),
-	callback = function(event)
-		if event.data.kind == "update" then
-			local ok = pcall(vim.cmd, "TSUpdate")
-			if ok then
-				vim.notify("TSUpdate completed successfully!", vim.log.levels.INFO)
-			else
-				vim.notify("TSUpdate command not available yet, skipping", vim.log.levels.WARN)
-			end
 		end
 	end,
 })

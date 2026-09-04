@@ -6,11 +6,16 @@ require("conform").setup({
 	format_on_save = function(bufnr)
 		-- You can specify filetypes to autoformat on save here:
 		local enabled_filetypes = {
-			-- lua = true,
-			-- python = true,
+			lua = true,
+			python = true,
+			typescript = true,
+			typescriptreact = true,
+			scala = true,
+			nix = true,
+			markdown = true,
 		}
 		if enabled_filetypes[vim.bo[bufnr].filetype] then
-			return { timeout_ms = 500 }
+			return { timeout_ms = 1000 }
 		else
 			return nil
 		end
@@ -22,15 +27,19 @@ require("conform").setup({
 	formatters_by_ft = {
 		-- rust = { 'rustfmt' },
 		-- Conform can also run multiple formatters sequentially
+		lua = { "stylua" },
 		python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 		typescript = { "oxfmt" },
 		typescriptreact = { "oxfmt" },
+		scala = { "scalafmt" }, -- install scalafmt outside of mason
+		nix = { "nixfmt" },
+		markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
 		--
 		-- You can use 'stop_after_first' to run the first available formatter from the list
 		-- javascript = { "prettierd", "prettier", stop_after_first = true },
 	},
 })
 
-vim.keymap.set({ "n", "v" }, "<leader>f", function()
+vim.keymap.set({ "n", "v" }, "<leader>cf", function()
 	require("conform").format({ async = true })
 end, { desc = "[F]ormat buffer" })

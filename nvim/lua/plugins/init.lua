@@ -24,6 +24,8 @@ require("plugins.conform")
 require("plugins.nvim-lint")
 require("plugins.trouble")
 require("plugins.todo-comments")
+require("plugins.markdown-preview")
+require("plugins.render-markdown")
 require("plugins.sidekick")
 
 require("plugins.gitsigns")
