@@ -2,7 +2,11 @@ vim.pack.add({
 	"https://github.com/gbprod/yanky.nvim",
 })
 
-require("yanky").setup({})
+require("yanky").setup({
+	highlight = {
+		timer = 150,
+	},
+})
 
 -- stylua: ignore start
 vim.keymap.set({ "n", "x" }, "<leader>y", require("snacks").picker.yanky, { desc = "Yank History" })

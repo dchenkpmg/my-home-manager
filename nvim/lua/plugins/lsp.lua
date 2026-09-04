@@ -46,6 +46,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			map("<leader>cr", vim.lsp.buf.rename, "Rename")
 		end
 
+		if supports("textDocument/inlayHint") then
+			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+		end
+
 		-- The following two autocommands are used to highlight references of the
 		-- word under your cursor when your cursor rests there for a little while.
 		--    See `:help CursorHold` for information about when this is executed
@@ -104,7 +108,21 @@ local servers = {
 	},
 	ruff = {},
 	stylua = {}, -- Used to format Lua code
-
+	tsc = {},
+	oxlint = {
+		root_dir = function(bufnr, on_dir)
+			-- prefer the top-level oxlint config if it exists (monorepo support)
+			local git = vim.fs.root(bufnr, ".git")
+			local markers = { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" }
+			local root = git and vim.fs.root(git, markers) or vim.fs.root(bufnr, markers)
+			if root then
+				on_dir(root)
+			end
+		end,
+		settings = {
+			fixKind = "all",
+		},
+	},
 	-- Special Lua Config, as recommended by neovim help docs
 	lua_ls = {
 		on_init = function(client)
@@ -167,7 +185,8 @@ require("mason-lspconfig").setup({
 -- You can press `g?` for help in this menu.
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
-	-- You can add other tools here that you want Mason to install
+	-- Formatters and other tools that are not LSP servers
+	"oxfmt",
 })
 
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
