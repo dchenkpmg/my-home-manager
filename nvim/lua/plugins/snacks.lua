@@ -25,7 +25,6 @@ Snacks.setup({
 							["<S-h>"] = "toggle_hidden",
 							["<S-i>"] = "toggle_ignored",
 							["<S-f>"] = "toggle_follow",
-							["<C-y>"] = { "yazi_copy_relative_path", mode = { "n", "i" } },
 						},
 					},
 				},
@@ -155,7 +154,6 @@ local keymaps = {
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
     { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
     { "<leader>gp", function() Snacks.picker.git_diff() end, desc = "Git Diff Picker (Hunks)" },
-    { "<leader>gP", function() Snacks.picker.git_diff({ base = "origin" }) end, desc = "Git Diff Picker(origin)" },
     { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
     -- Grep
     { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },

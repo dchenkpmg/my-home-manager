@@ -123,6 +123,7 @@ local servers = {
 			fixKind = "all",
 		},
 	},
+	metals = {},
 	-- Special Lua Config, as recommended by neovim help docs
 	lua_ls = {
 		on_init = function(client)
@@ -183,7 +184,9 @@ require("mason-lspconfig").setup({
 --    :Mason
 --
 -- You can press `g?` for help in this menu.
-local ensure_installed = vim.tbl_keys(servers or {})
+local ensure_installed = vim.tbl_filter(function(name)
+	return name ~= "metals"
+end, vim.tbl_keys(servers or {}))
 vim.list_extend(ensure_installed, {
 	-- Formatters and other tools that are not LSP servers
 	"oxfmt",

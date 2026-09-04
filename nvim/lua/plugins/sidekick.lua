@@ -4,6 +4,11 @@ vim.pack.add({
 
 require("sidekick").setup({
 	nes = { enabled = false },
+	cli = {
+		mux = {
+			enabled = true,
+		},
+	},
 })
 
 require("which-key").add({

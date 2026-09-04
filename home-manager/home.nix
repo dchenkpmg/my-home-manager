@@ -73,6 +73,7 @@ in {
       pkgs-unstable.pulumi
       pkgs-unstable.pulumiPackages.pulumi-nodejs
       pkgs-unstable.claude-code
+      pkgs-unstable.cursor-cli
     ];
 
     homeDirectory = "/Users/${username}";
