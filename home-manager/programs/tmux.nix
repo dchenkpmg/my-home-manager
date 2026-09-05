@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  pkgs-unstable,
-  ...
-}:
+{ pkgs, pkgs-unstable, ... }:
 let
   tmux-super-fingers = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "tmux-super-fingers";
@@ -53,8 +47,8 @@ in
   programs.tmux = {
     enable = true;
     package = pkgs-unstable.tmux;
-    plugins = with pkgs; [
-      pkgs-unstable.tmuxPlugins.fingers
+    plugins = with pkgs-unstable.tmuxPlugins; [
+      fingers
       {
         plugin = tmux-super-fingers;
         extraConfig = "set -g @super-fingers-key f";
@@ -77,14 +71,14 @@ in
       }
       tmux-mode-indicator
       {
-        plugin = pkgs-unstable.tmuxPlugins.resurrect;
+        plugin = resurrect;
         extraConfig = ''
           set -g @resurrect-capture-pane-contents 'on'
         '';
       }
-      pkgs-unstable.tmuxPlugins.continuum
-      pkgs-unstable.tmuxPlugins.better-mouse-mode
-      pkgs-unstable.tmuxPlugins.yank
+      continuum
+      better-mouse-mode
+      yank
       vim-tmux-navigator
     ];
     prefix = "C-a";

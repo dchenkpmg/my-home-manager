@@ -15,7 +15,7 @@
       "version": "1.0.0 - 2.0.0"
     },
     "blink.lib": {
-      "rev": "c8fdc12c8a2fab6cf786dd7141a283f8079f902b",
+      "rev": "e12366919e3447e4227d61e2ce99e2374de76d6a",
       "src": "https://github.com/saghen/blink.lib"
     },
     "blink.pairs": {
@@ -138,7 +138,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "project.nvim": {
-      "rev": "278ac548a5e1d5e76251bf03e1f75a11b452f8ad",
+      "rev": "cbaa2c5630189302beede84f5dbcd17278a60be2",
       "src": "https://github.com/DrKJeff16/project.nvim"
     },
     "render-markdown.nvim": {

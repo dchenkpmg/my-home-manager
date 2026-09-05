@@ -1,11 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
-  pkgs-unstable,
-  ...
-}:
-{
   programs.git = {
     enable = true;
     delta = {

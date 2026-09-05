@@ -7,7 +7,9 @@
 let
   username = "dychen";
   link = config.lib.file.mkOutOfStoreSymlink;
-  modules = [
+in
+{
+  imports = [
     ./programs/zsh.nix
     ./programs/tmux.nix
     ./programs/zoxide.nix
@@ -20,32 +22,27 @@ let
     ./programs/yazi.nix
     ./services/gpg-agent.nix
   ];
-in
-{
-  imports = modules;
   home = {
     inherit username;
-    packages = with pkgs; [
+    packages = with pkgs-unstable; [
       home-manager
       eza
       docker
       gnupg
-      du-dust
+      dust
       gping
-      texliveFull
       curl
       fd
       git-lfs
       gnugrep
       graphviz
-      pkgs-unstable.gum
+      gum
       gzip
       imagemagick
       jq
       lsof
-      man
-      pkgs-unstable.neovim
-      pkgs-unstable.nodejs
+      neovim
+      nodejs
       ripgrep
       rsync
       sqlite
@@ -54,32 +51,31 @@ in
       tlrc
       wget
       unzip
-      pkgs-unstable.cargo
-      pkgs-unstable.tree-sitter
-      pkgs-unstable.lazygit
-      pkgs-unstable.ttyper
-      pkgs-unstable.go
+      cargo
+      tree-sitter
+      lazygit
+      ttyper
+      go
       shellcheck
-      pkgs-unstable.uv
-      pkgs-unstable.typescript
-      pkgs-unstable.gh
-      pkgs-unstable.yarn
-      pkgs-unstable.duckdb
-      pkgs-unstable.coursier
-      pkgs-unstable.lsix
-      pkgs-unstable.poetry
-      pkgs-unstable.nixfmt
-      pkgs-unstable.google-cloud-sdk
-      pkgs-unstable.ffmpeg
-      pkgs-unstable.pnpm
-      pkgs-unstable.pulumi
-      pkgs-unstable.pulumiPackages.pulumi-nodejs
-      pkgs-unstable.claude-code
-      pkgs-unstable.cursor-cli
+      uv
+      typescript
+      gh
+      yarn
+      duckdb
+      coursier
+      lsix
+      poetry
+      nixfmt
+      google-cloud-sdk
+      ffmpeg
+      pnpm
+      pulumi
+      pulumiPackages.pulumi-nodejs
+      claude-code
+      cursor-cli
     ];
 
     homeDirectory = "/Users/${username}";
-
     stateVersion = "25.05";
     file = {
       ".config/nvim".source = link "/Users/${username}/my-home-manager/nvim";

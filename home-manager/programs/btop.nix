@@ -1,11 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
-  pkgs-unstable,
-  ...
-}:
-{
   programs.btop = {
     enable = true;
   };
