@@ -1,4 +1,3 @@
-require("plugins.pack-ui")
 require("plugins.rose-pine")
 require("plugins.snacks")
 require("plugins.which-key")
@@ -28,6 +27,10 @@ require("plugins.todo-comments")
 require("plugins.markdown-preview")
 require("plugins.render-markdown")
 require("plugins.sidekick")
+
+require("plugins.venv-selector")
+require("plugins.nvim-dap")
+require("plugins.neotest")
 
 require("plugins.gitsigns")
 require("plugins.project")

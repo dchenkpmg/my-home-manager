@@ -199,6 +199,7 @@ vim.list_extend(ensure_installed, {
 	"markdownlint-cli2",
 	"markdown-toc",
 	"prettier",
+	"js-debug-adapter",
 })
 
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
