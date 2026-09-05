@@ -1,3 +1,4 @@
+require("plugins.pack-ui")
 require("plugins.rose-pine")
 require("plugins.snacks")
 require("plugins.which-key")

@@ -125,6 +125,14 @@
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim"
     },
+    "pack-ui.nvim": {
+      "rev": "608fe1139753bc12637837c621fb8e51988a564e",
+      "src": "https://github.com/jtprogru/pack-ui.nvim"
+    },
+    "packview.nvim": {
+      "rev": "1c98841a224c7245cd63a4f480887d0b63d9320e",
+      "src": "https://github.com/Roddyck/packview.nvim"
+    },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"

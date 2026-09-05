@@ -106,7 +106,11 @@ local servers = {
 			},
 		},
 	},
-	ruff = {},
+	ruff = {
+		on_attach = function(client)
+			client.server_capabilities.hoverProvider = false
+		end,
+	},
 	stylua = {}, -- Used to format Lua code
 	tsc = {},
 	oxlint = {
