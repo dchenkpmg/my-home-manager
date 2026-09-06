@@ -31,7 +31,7 @@ require("plugins.sidekick")
 require("plugins.venv-selector")
 require("plugins.nvim-dap")
 require("plugins.neotest")
-
+require("plugins.diffview")
 require("plugins.gitsigns")
 require("plugins.project")
 require("plugins.bufferline")
