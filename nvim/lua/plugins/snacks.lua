@@ -3,9 +3,7 @@ vim.pack.add({
 	"https://github.com/nvim-tree/nvim-web-devicons",
 })
 
-local Snacks = require("snacks")
-
-Snacks.setup({
+require("snacks").setup({
 	bigfile = {},
 	explorer = { replace_netrw = false, trash = true },
 	indent = {},
