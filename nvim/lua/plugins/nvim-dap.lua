@@ -49,17 +49,6 @@ local source_maps = { "${workspaceFolder}/**", "!**/node_modules/**" }
 dap.configurations["typescript"] = {
 	{
 		type = "pwa-node",
-		request = "launch",
-		name = "Launch file",
-		program = "${file}",
-		cwd = "${workspaceFolder}",
-		sourceMaps = true,
-		runtimeExecutable = "tsx",
-		skipFiles = skip_files,
-		resolveSourceMapLocations = source_maps,
-	},
-	{
-		type = "pwa-node",
 		request = "attach",
 		name = "Attach",
 		processId = require("dap.utils").pick_process,
