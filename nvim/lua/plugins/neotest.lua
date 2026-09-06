@@ -1,15 +1,23 @@
 vim.pack.add({ "https://github.com/nvim-neotest/nvim-nio" })
+vim.pack.add({ "https://github.com/nvim-neotest/neotest-plenary" })
 vim.pack.add({ "https://github.com/nvim-neotest/neotest-python" })
 vim.pack.add({ "https://github.com/marilari88/neotest-vitest" })
+vim.pack.add({ "https://github.com/olisikh/neotest-scala" })
 vim.pack.add({ "https://github.com/nvim-neotest/neotest" })
 
 require("neotest").setup({
 	adapters = {
 		require("neotest-python"),
 		require("neotest-vitest"),
+		require("neotest-scala"),
 	},
 	status = { virtual_text = true },
 	output = { open_on_run = true },
+	quickfix = {
+		open = function()
+			require("trouble").open({ mode = "quickfix", focus = false })
+		end,
+	},
 })
 
 require("which-key").add({

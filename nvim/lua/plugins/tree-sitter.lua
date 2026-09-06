@@ -7,8 +7,21 @@ end)
 vim.pack.add({ { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" } })
 
 -- Ensure basic parsers are installed
-local parsers =
-	{ "bash", "c", "diff", "html", "lua", "luadoc", "markdown", "markdown_inline", "query", "vim", "vimdoc", "regex" }
+local parsers = {
+	"bash",
+	"c",
+	"diff",
+	"html",
+	"lua",
+	"luadoc",
+	"markdown",
+	"markdown_inline",
+	"query",
+	"vim",
+	"vimdoc",
+	"regex",
+	"xml",
+}
 require("nvim-treesitter").install(parsers)
 
 ---@param buf integer
@@ -22,7 +35,6 @@ local function treesitter_try_attach(buf, language)
 	vim.treesitter.start(buf, language)
 
 	-- Enable treesitter based folds
-	-- For more info on folds see `:help folds`
 	vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 	vim.wo.foldmethod = "expr"
 

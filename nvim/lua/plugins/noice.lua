@@ -100,8 +100,6 @@ M.on_hide = function(event, level)
 	original_hide(event, level)
 end
 
-
--- Keymaps
 -- stylua: ignore start
 vim.keymap.set({ "n" }, "<leader>sn", "", { desc = "+noice" })
 vim.keymap.set("c", "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, { desc = "Redirect Cmdline" })

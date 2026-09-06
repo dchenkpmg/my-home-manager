@@ -20,7 +20,6 @@ wk.add({
 	{ "[", group = "prev" },
 	{ "]", group = "next" },
 	{ "g", group = "goto" },
-	{ "gs", group = "surround" },
 	{ "z", group = "fold" },
 	{
 		"<leader>b",
@@ -69,19 +68,19 @@ wk.add({
 			end,
 			desc = "Copy relative file path",
 		},
-		{
-			"<leader>?",
-			function()
-				require("which-key").show({ global = false })
-			end,
-			desc = "Buffer Keymaps (which-key)",
-		},
-		{
-			"<c-w><space>",
-			function()
-				require("which-key").show({ keys = "<c-w>", loop = true })
-			end,
-			desc = "Window Hydra Mode (which-key)",
-		},
+	},
+	{
+		"<leader>?",
+		function()
+			require("which-key").show({ global = false })
+		end,
+		desc = "Buffer Keymaps (which-key)",
+	},
+	{
+		"<c-w><space>",
+		function()
+			require("which-key").show({ keys = "<c-w>", loop = true })
+		end,
+		desc = "Window Hydra Mode (which-key)",
 	},
 })

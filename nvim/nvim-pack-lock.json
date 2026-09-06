@@ -88,9 +88,17 @@
       "rev": "27bf921498043f7ecd821d6db68d05de244bbd02",
       "src": "https://github.com/nvim-neotest/neotest"
     },
+    "neotest-plenary": {
+      "rev": "3523adcf9ffaad1911960c5813b0136c1b63a2ec",
+      "src": "https://github.com/nvim-neotest/neotest-plenary"
+    },
     "neotest-python": {
       "rev": "1b56ca4ba51c6014f986d6548ee629bdc95589d1",
       "src": "https://github.com/nvim-neotest/neotest-python"
+    },
+    "neotest-scala": {
+      "rev": "a7ebaae13f889eac27db54d184a185ccf8a55fd9",
+      "src": "https://github.com/olisikh/neotest-scala"
     },
     "neotest-vitest": {
       "rev": "c3c69715da4b158069fd4262083e7219a5c14cfb",

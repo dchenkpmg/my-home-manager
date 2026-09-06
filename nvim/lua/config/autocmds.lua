@@ -52,23 +52,16 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("close_with_q"),
 	pattern = {
-		"PlenaryTestPopup",
 		"checkhealth",
 		"dap-float",
-		"dbout",
 		"gitsigns-blame",
 		"grug-far",
 		"help",
-		"lspinfo",
+		"man",
 		"neotest-output",
 		"neotest-output-panel",
 		"neotest-summary",
-		"notify",
-		"oil",
 		"qf",
-		"spectre_panel",
-		"startuptime",
-		"tsplayground",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
@@ -82,15 +75,6 @@ vim.api.nvim_create_autocmd("FileType", {
 				desc = "Quit buffer",
 			})
 		end)
-	end,
-})
-
--- make it easier to close man-files when opened inline
-vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("man_unlisted"),
-	pattern = { "man" },
-	callback = function(event)
-		vim.bo[event.buf].buflisted = false
 	end,
 })
 

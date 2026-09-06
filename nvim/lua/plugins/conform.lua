@@ -1,4 +1,3 @@
--- [[ Formatting ]]
 vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 
 require("conform").setup({
@@ -25,8 +24,8 @@ require("conform").setup({
 	},
 	-- You can also specify external formatters in here.
 	formatters_by_ft = {
-		-- rust = { 'rustfmt' },
 		-- Conform can also run multiple formatters sequentially
+		-- You can use 'stop_after_first' to run the first available formatter from the list
 		lua = { "stylua" },
 		python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 		typescript = { "oxfmt" },
@@ -34,9 +33,6 @@ require("conform").setup({
 		scala = { "scalafmt" }, -- install scalafmt outside of mason
 		nix = { "nixfmt" },
 		markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
-		--
-		-- You can use 'stop_after_first' to run the first available formatter from the list
-		-- javascript = { "prettierd", "prettier", stop_after_first = true },
 	},
 })
 

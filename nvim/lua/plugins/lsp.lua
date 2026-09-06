@@ -5,11 +5,6 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = augroup("lsp-attach"),
 	callback = function(event)
-		-- NOTE: Remember that Lua is a real programming language, and as such it is possible
-		-- to define small helper and utility functions so you don't have to repeat yourself.
-		--
-		-- In this case, we create a function that lets us more easily define mappings specific
-		-- for LSP related items. It sets the mode, buffer and description for us each time.
 		local map = function(keys, func, desc, mode, opts)
 			opts = opts or {}
 			opts.buffer = event.buf
@@ -49,50 +44,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		if supports("textDocument/inlayHint") then
 			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
 		end
-
-		-- The following two autocommands are used to highlight references of the
-		-- word under your cursor when your cursor rests there for a little while.
-		--    See `:help CursorHold` for information about when this is executed
-		--
-		-- When you move your cursor, the highlights will be cleared (the second autocommand).
-		if supports("textDocument/documentHighlight") then
-			local highlight_augroup = augroup("lsp-highlight")
-			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-				buffer = event.buf,
-				group = highlight_augroup,
-				callback = vim.lsp.buf.document_highlight,
-			})
-
-			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-				buffer = event.buf,
-				group = highlight_augroup,
-				callback = vim.lsp.buf.clear_references,
-			})
-
-			vim.api.nvim_create_autocmd("LspDetach", {
-				group = augroup("lsp-detach"),
-				callback = function(event2)
-					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds({ group = highlight_augroup, buffer = event2.buf })
-				end,
-			})
-		end
-
-		-- The following code creates a keymap to toggle inlay hints in your
-		-- code, if the language server you are using supports them
-		--
-		-- This may be unwanted, since they displace some of your code
-		-- if client and client:supports_method("textDocument/inlayHint", event.buf) then
-		-- 	map("<leader>cth", function()
-		-- 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-		-- 	end, "Toggle Inlay Hints")
-		-- end
 	end,
 })
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---  See `:help lsp-config` for information about keys and how to configure
 ---@type table<string, vim.lsp.Config>
 local servers = {
 	pyright = {
@@ -153,7 +107,6 @@ local servers = {
 				},
 				workspace = {
 					checkThirdParty = false,
-					-- NOTE: this is a lot slower and will cause issues when working on your own configuration.
 					--  See https://github.com/neovim/nvim-lspconfig/issues/3189
 					library = vim.api.nvim_get_runtime_file("", true),
 				},
@@ -184,12 +137,6 @@ require("mason-lspconfig").setup({
 })
 
 -- Ensure the servers and tools above are installed
---
--- To check the current status of installed tools and/or manually install
--- other tools, you can run
---    :Mason
---
--- You can press `g?` for help in this menu.
 local ensure_installed = vim.tbl_filter(function(name)
 	return name ~= "metals"
 end, vim.tbl_keys(servers or {}))
