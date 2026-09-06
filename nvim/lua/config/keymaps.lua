@@ -130,3 +130,6 @@ map("n", "zv", "zMzvzz", { desc = "Close all folds except the current one" })
 -- Smart fold navigation (closes current, opens next/previous)
 map("n", "zj", "zcjzOzz", { desc = "Close current fold when open. Always open next fold." })
 map("n", "zk", "zckzOzz", { desc = "Close current fold when open. Always open previous fold." })
+
+-- Pack Update All
+map("n", "<leader>p", "<cmd>lua vim.pack.update()<cr>", { desc = "Pack Update All" })
