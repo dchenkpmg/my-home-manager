@@ -7,7 +7,6 @@ require("sidekick").setup({
 	cli = {
 		mux = {
 			enabled = true,
-			create = "window",
 		},
 	},
 })
